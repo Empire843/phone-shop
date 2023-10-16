@@ -11,4 +11,14 @@ public class HomeController {
         model.addAttribute("title", "Spring Boot x Tailwind CSS");
         return "home";
     }
+    @GetMapping("login")
+    public String loginPage(Model model) {
+        model.addAttribute("title", "Spring Boot x Tailwind CSS");
+        return "login";
+    }
+    @GetMapping("register")
+    public String registerPage(Model model) {
+        model.addAttribute("title", "Spring Boot x Tailwind CSS");
+        return "register";
+    }
 }
