@@ -3,6 +3,9 @@ package ptit.tttn.phoneshop.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -17,11 +20,13 @@ public class User {
     private String lastName;
     private String firstName;
     private String email;
+    private String username;
     private String password;
     private String phone;
-    private String address;
+    @OneToMany(mappedBy = "user")
+    private List<Address> address = new ArrayList<>();
     @Enumerated(EnumType.STRING)
     private Role role;
-    private Boolean active;
+    private boolean active;
     private String urlImage;
 }

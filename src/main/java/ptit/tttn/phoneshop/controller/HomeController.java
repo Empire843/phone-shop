@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-    @GetMapping("/")
+    @GetMapping(value = {"/", "home"})
     public String indexPage(Model model) {
         model.addAttribute("title", "Spring Boot x Tailwind CSS");
-        return "home";
+        return "index";
     }
     @GetMapping("login")
     public String loginPage(Model model) {
@@ -20,5 +20,15 @@ public class HomeController {
     public String registerPage(Model model) {
         model.addAttribute("title", "Spring Boot x Tailwind CSS");
         return "register";
+    }
+    @GetMapping("edit-product")
+    public String updateProductPage(Model model) {
+        model.addAttribute("title", "Spring Boot x Tailwind CSS");
+        return "admin/edit-product";
+    }
+    @GetMapping("product-detail")
+    public String productDetails(Model model) {
+        model.addAttribute("title", "Spring Boot x Tailwind CSS");
+        return "user/product-details";
     }
 }

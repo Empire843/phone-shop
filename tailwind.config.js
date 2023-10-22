@@ -4,7 +4,37 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {"50":"#faf5ff","100":"#f3e8ff","200":"#e9d5ff","300":"#d8b4fe","400":"#c084fc","500":"#a855f7","600":"#9333ea","700":"#7e22ce","800":"#6b21a8","900":"#581c87","950":"#3b0764"}
+        primary: {
+          "50":"#eff6ff",
+          "100":"#dbeafe",
+          "200":"#bfdbfe",
+          "300":"#93c5fd",
+          "400":"#60a5fa",
+          "500":"#3b82f6",
+          "600":"#2563eb",
+          "700":"#1d4ed8",
+          "800":"#1e40af",
+          "900":"#1e3a8a",
+          "950":"#172554"
+        },
+        boxShadow: {
+          'gray-shadow': '0px 4px 4px 0px #00000040',
+          'black-shadow': '0px 4px 4px 0px #00000080',
+          'blur': '0px 0px 4px 0px #00000080',
+          'blur-btn': '0px 0px 4px 0px #00000040',
+        },
+        backgroundColor: {
+          'primary-red': '#B5013E',
+          'primary-dark-blue': '#0583D2',
+          'primary-light-blue': '#B8E3FF',
+          'primary-orange': '#FF9715',
+        },
+        colors: {
+          'primary-red': '#B5013E',
+          'primary-dark-blue': '#0583D2',
+          'primary-light-blue': '#B8E3FF',
+          'primary-orange': '#FF9715',
+        },
       }
     },
     fontFamily: {
@@ -46,6 +76,8 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/forms'),
+    require('flowbite/plugin'),
+
   ],
 }
 

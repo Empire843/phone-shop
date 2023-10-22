@@ -3,6 +3,9 @@ package ptit.tttn.phoneshop.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -15,24 +18,17 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String urlImage;
+    private String brand;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Color> colors = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Image> images = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
     private String description;
     private Double price;
     private Integer quantity;
-    private String brand;
-    private String color;
-    private String os;
-    private String screen;
-    private String frontCamera;
-    private String rearCamera;
-    private String cpu;
-    private String ram;
-    private String memory;
-    private String sim;
-    private String pin;
-    private String promotion;
-    private String status;
-    private String urlImage1;
-
-
 }

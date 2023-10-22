@@ -1,10 +1,212 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <link rel="stylesheet" href="/dist/output.css" />-->
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+    <style>
+        /* Thiết lập chiều rộng và hiệu ứng cho slider */
+        #slider {
+            transform: translateX(0);
+        }
+
+        #slider img {
+            flex: 0 0 100%;
+        }
+    </style>
+
+    <title>Document</title>
 </head>
 <body>
+<nav class="relative bg-white dark:bg-gray-900  w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <a  class="flex items-center object-cover">
+            <img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                 class="w-full h-16 mr-3 object-cover" alt="Flowbite Logo">
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Shopping</span>
+        </a>
+        <div class="flex md:order-2 items-center">
+            <div class="relative  text-left flex items-center gap-3">
+                <div>
+                    <button class="border-2 border-gray-300 border-separate rounded-full">
+                        <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown"
+                             data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer"
+                             src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                             alt="User dropdown">
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div id="userDropdown"
+                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                            <div>Bonnie Green</div>
+                            <div class="font-medium truncate">name@flowbite.com</div>
+                        </div>
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
+                            <li>
+                                <a href="#"
+                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                            </li>
+                        </ul>
+                        <div class="py-1">
+                            <a href="#"
+                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+                                out</a>
+                        </div>
 
+                    </div>
+
+                </div>
+
+                <button class="w-7"><a href="/src/cart.html"><img class="w-full" src="/images/cart_icon.svg"
+                                                                  alt=""></a></button>
+                <!-- <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+              <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
+                      aria-hidden="true">&rarr;</span></a>
+          </div> -->
+            </div>
+        </div>
+        <div class="items-center justify-between hidden] md:flex md:w-auto md:order-1" id="navbar-sticky">
+
+            <form class="w-[500px] flex items-center">
+                <label for="simple-search" class="sr-only">Search</label>
+                <div class="relative w-full">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
+                        </svg>
+                    </div>
+                    <input type="text" id="simple-search"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                           placeholder="Search branch name..." required>
+                </div>
+                <button type="submit"
+                        class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                         viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                    </svg>
+                    <span class="sr-only">Search</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
+<main class="container px-32 h-96 m-auto">
+    <div class="">
+        <div class="w-full">
+            <div class="relative w-full overflow-hidden mt-2">
+                <div id="slider" class="w-full flex items-start transition-transform ease-in-out duration-500">
+                    <img class="img-slide rounded-3xl object-scale-down"
+                         src="//images.samsung.com/is/image/samsung/assets/vn/offer/ce-hot-deal/youmake/1023/2PC.jpg?imwidth=1366"
+                         alt="Image 1">
+                    <img class="img-slide  rounded-3xl w-full object-cover"
+                         src="//images.samsung.com/is/image/samsung/assets/vn/offer/ce-hot-deal/youmake/1023/1pc.jpg?imwidth=1366"
+                         alt="Image 2">
+                    <img class="img-slide rounded-3xl w-full object-cover"
+                         src="https://img.freepik.com/premium-psd/horizontal-website-banne_451189-109.jpg?w=1380"
+                         alt="Image 3">
+                    <img class="img-slide rounded-3xl w-full object-cover"
+                         src="//images.samsung.com/is/image/samsung/assets/vn/home/2023/07-hd01-FE-ECO-kv-pc-1440x640.jpg?imwidth=1366 object-cover"
+                         alt="Image 4">
+                    <img class="img-slide rounded-3xl w-full object-cover"
+                         src="https://img.freepik.com/free-psd/sales-discount-facebook-template_23-2149959351.jpg?w=1380&t=st=1697991032~exp=1697991632~hmac=f567291bdbbd4fca7229c87a3ea4dc2c48d6799dc487be61e57394401cfe91a6">
+                </div>
+            </div>
+            <script>
+                const slider = document.getElementById('slider');
+                const images = slider.querySelectorAll('.img-slide');
+
+                let currentImageIndex = 0;
+                const imageCount = images.length;
+                const slideInterval = 4000;
+
+                function changeImage() {
+                    currentImageIndex = (currentImageIndex + 1) % imageCount;
+                    const translateValue = -currentImageIndex * 100;
+                    slider.style.transform = `translateX(${translateValue}%)`;
+                }
+
+                function startSlider() {
+                    setInterval(changeImage, slideInterval);
+                }
+                startSlider();
+            </script>
+        </div>
+        <div class="h-10">
+            <p class="text-center font-semibold text-4xl">Sản phẩm nổi bật</p>
+            <div class="grid grid-cols-4 my-10 gap-10">
+                <div class="w-64 border rounded-2xl bg-gray-100 flex flex-col items-center">
+                    <img class="m-auto" src="https://images.samsung.com/is/image/samsung/p6pim/vn/sm-a057fzsgxxv/gallery/vn-galaxy-a05s-sm-a057-sm-a057fzsgxxv-thumb-538358267?$216_216_PNG$" alt="">
+                    <p class="text-2xl font-semibold text-center">Galaxy A52S</p>
+                    <br>
+                    <p class="text-center my-2">Màu sắc: Bạc</p>
+                    <p class="font-semibold text-center">128 GB</p>
+                    <p class="font-semibold text-center">4 GB</p>
+                    <p class="text-3xl text-center font-semibold mb-4">3.989.700đ</p>
+                    <button class="mt-2 mb-5 text-lg py-2 px-12 border bg-primary-red text-white rounded-full">Mua ngay</button>
+                </div>
+                <div class="w-64 border rounded-2xl bg-gray-100 flex flex-col items-center">
+                    <img class="m-auto" src="https://images.samsung.com/is/image/samsung/p6pim/vn/sm-a057fzsgxxv/gallery/vn-galaxy-a05s-sm-a057-sm-a057fzsgxxv-thumb-538358267?$216_216_PNG$" alt="">
+                    <p class="text-2xl font-semibold text-center">Galaxy A52S</p>
+                    <br>
+                    <p class="text-center my-2">Màu sắc: Bạc</p>
+                    <p class="font-semibold text-center">128 GB</p>
+                    <p class="font-semibold text-center">4 GB</p>
+                    <p class="text-3xl text-center font-semibold mb-4">3.989.700đ</p>
+                    <button class="mt-2 mb-5 text-lg py-2 px-12 border bg-primary-red text-white rounded-full">Mua ngay</button>
+                </div>
+                <div class="w-64 border rounded-2xl bg-gray-100 flex flex-col items-center">
+                    <img class="m-auto" src="https://images.samsung.com/is/image/samsung/p6pim/vn/sm-a057fzsgxxv/gallery/vn-galaxy-a05s-sm-a057-sm-a057fzsgxxv-thumb-538358267?$216_216_PNG$" alt="">
+                    <p class="text-2xl font-semibold text-center">Galaxy A52S</p>
+                    <br>
+                    <p class="text-center my-2">Màu sắc: Bạc</p>
+                    <p class="font-semibold text-center">128 GB</p>
+                    <p class="font-semibold text-center">4 GB</p>
+                    <p class="text-3xl text-center font-semibold mb-4">3.989.700đ</p>
+                    <button class="mt-2 mb-5 text-lg py-2 px-12 border bg-primary-red text-white rounded-full">Mua ngay</button>
+                </div>
+                <div class="w-64 border rounded-2xl bg-gray-100 flex flex-col items-center">
+                    <img class="m-auto" src="https://images.samsung.com/is/image/samsung/p6pim/vn/sm-a057fzsgxxv/gallery/vn-galaxy-a05s-sm-a057-sm-a057fzsgxxv-thumb-538358267?$216_216_PNG$" alt="">
+                    <p class="text-2xl font-semibold text-center">Galaxy A52S</p>
+                    <br>
+                    <p class="text-center my-2">Màu sắc: Bạc</p>
+                    <p class="font-semibold text-center">128 GB</p>
+                    <p class="font-semibold text-center">4 GB</p>
+                    <p class="text-3xl text-center font-semibold mb-4">3.989.700đ</p>
+                    <button class="mt-2 mb-5 text-lg py-2 px-12 border bg-primary-red text-white rounded-full">Mua ngay</button>
+                </div>
+                <div class="w-64 border rounded-2xl bg-gray-100 flex flex-col items-center">
+                    <img class="m-auto" src="https://images.samsung.com/is/image/samsung/p6pim/vn/sm-a057fzsgxxv/gallery/vn-galaxy-a05s-sm-a057-sm-a057fzsgxxv-thumb-538358267?$216_216_PNG$" alt="">
+                    <p class="text-2xl font-semibold text-center">Galaxy A52S</p>
+                    <br>
+                    <p class="text-center my-2">Màu sắc: Bạc</p>
+                    <p class="font-semibold text-center">128 GB</p>
+                    <p class="font-semibold text-center">4 GB</p>
+                    <p class="text-3xl text-center font-semibold mb-4">3.989.700đ</p>
+                    <button class="mt-2 mb-5 text-lg py-2 px-12 border bg-primary-red text-white rounded-full">Mua ngay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 </body>
+
 </html>
