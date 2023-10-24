@@ -23,8 +23,8 @@ public class User {
     private String username;
     private String password;
     private String phone;
-    @OneToMany(mappedBy = "user")
-    private List<Address> address = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    List<Address> addresses = new ArrayList<>();
     @Enumerated(EnumType.STRING)
     private Role role;
     private boolean active;
