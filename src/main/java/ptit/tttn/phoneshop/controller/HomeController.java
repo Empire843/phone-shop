@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
     private static final String USER_HOME = "user/home";
-
-    @GetMapping(value = {"/", "home"})
+    @GetMapping("/")
+    public String homePage(Model model) {
+        return "uploadImage";
+    }
+    @GetMapping(value = {"/s", "home"})
     public String indexPage(Model model) {
         model.addAttribute("title", "Spring Boot x Tailwind CSS");
         return "index";
