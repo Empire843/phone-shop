@@ -24,7 +24,7 @@ public class User {
     private String password;
     private String phone;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    List<Address> addresses = new ArrayList<>();
+    List<DeliveryAddress> addresses = new ArrayList<>();
     @Enumerated(EnumType.STRING)
     private Role role;
     private boolean active;
