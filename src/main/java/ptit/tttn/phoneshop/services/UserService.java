@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import ptit.tttn.phoneshop.models.Role;
 import ptit.tttn.phoneshop.models.User;
 import ptit.tttn.phoneshop.repositories.UserRepository;
 import ptit.tttn.phoneshop.request.RegisterRequest;
@@ -16,7 +17,7 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
     public User register(RegisterRequest registerRequest) {
-        if(checkUsernameExist(registerRequest.getUsername())) {
+        if(checkUsernameExist(registerRequest.getEmail())) {
             throw new RuntimeException("Username already exists");
         }
         if(checkEmailExist(registerRequest.getEmail())) {
@@ -26,12 +27,13 @@ public class UserService {
             throw new RuntimeException("Password does not match");
         }
         User user = User.builder()
-                .username(registerRequest.getUsername())
+                .username(registerRequest.getEmail())
                 .password(passwordEncoder.encode(registerRequest.getPassword()))
                 .email(registerRequest.getEmail())
                 .phone(registerRequest.getPhone())
                 .firstName(registerRequest.getFirstName())
                 .lastName(registerRequest.getLastName())
+                .role(Role.USER)
                 .build();
         return repo.save(user);
     }
