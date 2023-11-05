@@ -1,5 +1,6 @@
 package ptit.tttn.phoneshop.tools;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -27,6 +28,10 @@ public class DataLoader implements ApplicationRunner {
                     .role(Role.ADMIN)
                     .active(true)
                     .verify(true)
+//                    .create_at(DateTime.now())
+//                    .update_at(DateTime.now())
+//                    .verify_at(DateTime.now())
+                    .description("Admin")
                     .build();
             repo.save(user);
         }

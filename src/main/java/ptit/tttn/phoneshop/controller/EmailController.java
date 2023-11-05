@@ -15,7 +15,9 @@ import java.util.logging.Logger;
 @RequestMapping("/email")
 public class EmailController {
     @Autowired
-    private UserRepository userRepository; // Assuming you have a UserRepository
+    private UserRepository userRepository;
+    @Autowired
+    private EmailSenderImpl emailSender;
 
     @GetMapping("")
     public String home() {
@@ -24,7 +26,6 @@ public class EmailController {
     @PostMapping("/send")
     public String sendEmail(@RequestParam("email") String email, @RequestParam("subject") String subject, @RequestParam("message") String message) {
         try {
-            EmailSenderImpl emailSender = new EmailSenderImpl();
             emailSender.sendEmail(email, subject, message);
             Logger.getLogger(EmailController.class.getName()).info("send email success");
         }catch (Exception e){

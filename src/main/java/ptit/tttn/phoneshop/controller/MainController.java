@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ptit.tttn.phoneshop.request.RegisterRequest;
 import ptit.tttn.phoneshop.services.UserService;
+import ptit.tttn.phoneshop.services.implement.EmailSenderImpl;
 
 import java.util.logging.Logger;
 
@@ -32,6 +33,8 @@ public class MainController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private UserService userService;
+    @Autowired
+    private EmailSenderImpl emailSender;
     @GetMapping("/")
     public String home() {
         return HOME_PAGE;
@@ -70,10 +73,16 @@ public class MainController {
             ptit.tttn.phoneshop.models.User user = userService.register(registerRequest);
             model.addAttribute("message", "Đăng ký thành công");
             model.addAttribute("user", user);
+//            emailSender.sendEmail(user.getEmail());
+            return "common/confirm_email";
         } catch (RuntimeException e) {
             model.addAttribute("errorMessage", "Đăng ký thất bại: "+e.getMessage());
             return "error/errorPage";
         }
-        return "redirect:/login";
+    }
+
+    @GetMapping("confirm")
+    public String verify() {
+        return "common/confirm_email";
     }
 }
