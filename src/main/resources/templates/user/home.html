@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--    <link rel="stylesheet" href="/dist/output.css" />-->
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet"/>
+    <style>
+        #slider {
+            transform: translateX(0);
+        }
+
+        #slider img {
+            flex: 0 0 100%;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+<div th:replace="layout/header :: header(fullname, email)"></div>
+<!--<div th:replace="fragments/content :: content"></div>-->
+<!--<div th:replace="fragments/footer :: footer"></div>-->
+<main class="container px-32 h-96 m-auto">
+    <div class="">
+        <div class="w-full">
+            <div class="relative w-full overflow-hidden mt-2">
+                <div id="slider" class="w-full flex items-start transition-transform ease-in-out duration-500">
+                    <img class="img-slide rounded-3xl object-scale-down"
+                         src="//images.samsung.com/is/image/samsung/assets/vn/offer/ce-hot-deal/youmake/1023/2PC.jpg?imwidth=1366"
+                         alt="Image 1">
+                    <img class="img-slide  rounded-3xl w-full object-cover"
+                         src="//images.samsung.com/is/image/samsung/assets/vn/offer/ce-hot-deal/youmake/1023/1pc.jpg?imwidth=1366"
+                         alt="Image 2">
+                    <img class="img-slide rounded-3xl w-full object-cover"
+                         src="https://img.freepik.com/premium-psd/horizontal-website-banne_451189-109.jpg?w=1380"
+                         alt="Image 3">
+                    <img class="img-slide rounded-3xl w-full object-cover"
+                         src="//images.samsung.com/is/image/samsung/assets/vn/home/2023/07-hd01-FE-ECO-kv-pc-1440x640.jpg?imwidth=1366 object-cover"
+                         alt="Image 4">
+                    <img class="img-slide rounded-3xl w-full object-cover"
+                         src="https://img.freepik.com/free-psd/sales-discount-facebook-template_23-2149959351.jpg?w=1380&t=st=1697991032~exp=1697991632~hmac=f567291bdbbd4fca7229c87a3ea4dc2c48d6799dc487be61e57394401cfe91a6">
+                </div>
+            </div>
+            <script>
+                const slider = document.getElementById('slider');
+                const images = slider.querySelectorAll('.img-slide');
+
+                let currentImageIndex = 0;
+                const imageCount = images.length;
+                const slideInterval = 4000;
+
+                function changeImage() {
+                    currentImageIndex = (currentImageIndex + 1) % imageCount;
+                    const translateValue = -currentImageIndex * 100;
+                    slider.style.transform = `translateX(${translateValue}%)`;
+                }
+
+                function startSlider() {
+                    setInterval(changeImage, slideInterval);
+                }
+                startSlider();
+            </script>
+        </div>
+        <div class="h-10">
+            <p class="text-center font-semibold text-4xl">Sản phẩm nổi bật</p>
+            <div class="grid grid-cols-4 my-10 gap-10">
+                <div class=" border rounded-2xl bg-gray-100 flex flex-col items-center">
+                    <img class="m-auto" src="https://images.samsung.com/is/image/samsung/p6pim/vn/sm-a057fzsgxxv/gallery/vn-galaxy-a05s-sm-a057-sm-a057fzsgxxv-thumb-538358267?$216_216_PNG$" alt="">
+                    <p class="text-2xl font-semibold text-center">Galaxy A52S</p>
+                    <br>
+                    <p class="text-center my-2">Màu sắc: Bạc</p>
+                    <p class="font-semibold text-center">128 GB</p>
+                    <p class="font-semibold text-center">4 GB</p>
+                    <p class="text-3xl text-center font-semibold mb-4">3.989.700đ</p>
+                    <button class="mt-2 mb-5 text-lg py-2 px-12 border bg-primary-red text-white rounded-full">Mua ngay</button>
+                </div>
+                <div class=" border rounded-2xl bg-gray-100 flex flex-col items-center">
+                    <img class="m-auto" src="https://images.samsung.com/is/image/samsung/p6pim/vn/sm-a057fzsgxxv/gallery/vn-galaxy-a05s-sm-a057-sm-a057fzsgxxv-thumb-538358267?$216_216_PNG$" alt="">
+                    <p class="text-2xl font-semibold text-center">Galaxy A52S</p>
+                    <br>
+                    <p class="text-center my-2">Màu sắc: Bạc</p>
+                    <p class="font-semibold text-center">128 GB</p>
+                    <p class="font-semibold text-center">4 GB</p>
+                    <p class="text-3xl text-center font-semibold mb-4">3.989.700đ</p>
+                    <button class="mt-2 mb-5 text-lg py-2 px-12 border bg-primary-red text-white rounded-full">Mua ngay</button>
+                </div>
+                <div class="border rounded-2xl bg-gray-100 flex flex-col items-center">
+                    <img class="m-auto" src="https://images.samsung.com/is/image/samsung/p6pim/vn/sm-a057fzsgxxv/gallery/vn-galaxy-a05s-sm-a057-sm-a057fzsgxxv-thumb-538358267?$216_216_PNG$" alt="">
+                    <p class="text-2xl font-semibold text-center">Galaxy A52S</p>
+                    <br>
+                    <p class="text-center my-2">Màu sắc: Bạc</p>
+                    <p class="font-semibold text-center">128 GB</p>
+                    <p class="font-semibold text-center">4 GB</p>
+                    <p class="text-3xl text-center font-semibold mb-4">3.989.700đ</p>
+                    <button class="mt-2 mb-5 text-lg py-2 px-12 border bg-primary-red text-white rounded-full">Mua ngay</button>
+                </div>
+                <div class=" border rounded-2xl bg-gray-100 flex flex-col items-center">
+                    <img class="m-auto" src="https://images.samsung.com/is/image/samsung/p6pim/vn/sm-a057fzsgxxv/gallery/vn-galaxy-a05s-sm-a057-sm-a057fzsgxxv-thumb-538358267?$216_216_PNG$" alt="">
+                    <p class="text-2xl font-semibold text-center">Galaxy A52S</p>
+                    <br>
+                    <p class="text-center my-2">Màu sắc: Bạc</p>
+                    <p class="font-semibold text-center">128 GB</p>
+                    <p class="font-semibold text-center">4 GB</p>
+                    <p class="text-3xl text-center font-semibold mb-4">3.989.700đ</p>
+                    <button class="mt-2 mb-5 text-lg py-2 px-12 border bg-primary-red text-white rounded-full">Mua ngay</button>
+                </div>
+                <div class=" border rounded-2xl bg-gray-100 flex flex-col items-center">
+                    <img class="m-auto" src="https://images.samsung.com/is/image/samsung/p6pim/vn/sm-a057fzsgxxv/gallery/vn-galaxy-a05s-sm-a057-sm-a057fzsgxxv-thumb-538358267?$216_216_PNG$" alt="">
+                    <p class="text-2xl font-semibold text-center">Galaxy A52S</p>
+                    <br>
+                    <p class="text-center my-2">Màu sắc: Bạc</p>
+                    <p class="font-semibold text-center">128 GB</p>
+                    <p class="font-semibold text-center">4 GB</p>
+                    <p class="text-3xl text-center font-semibold mb-4">3.989.700đ</p>
+                    <button class="mt-2 mb-5 text-lg py-2 px-12 border bg-primary-red text-white rounded-full">Mua ngay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+</body>
+
+</html>

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.joda.time.DateTime;
 
 @Entity
 @NoArgsConstructor
@@ -22,5 +23,16 @@ public class CartItem {
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
+    private DateTime create_at;
+    private DateTime update_at;
 
+    @Override
+    public String toString() {
+        return "CartItem{" +
+                "id=" + id +
+                ", quantity=" + quantity +
+                ", create_at=" + create_at +
+                ", update_at=" + update_at +
+                '}';
+    }
 }

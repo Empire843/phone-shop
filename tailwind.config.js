@@ -3,39 +3,37 @@ module.exports = {
   content: ["./src/main/resources/templates/**/*.{html,js}"],
   theme: {
     extend: {
+      boxShadow: {
+        'gray-shadow': '0px 4px 4px 0px #00000040',
+        'black-shadow': '0px 4px 4px 0px #00000080',
+        'blur': '0px 0px 4px 0px #00000080',
+        'blur-btn': '0px 0px 4px 0px #00000040',
+      },
+      backgroundColor: {
+        'primary-red': '#B5013E',
+        'primary-light-red': '#CD5C5C',
+        'primary-dark-pink': '#F3D9D9',
+        'primary-pink': '#FFEBEB',
+        'prinary-gray': '#F9F9F9',
+        'prinary-dark-gray': '#BDBDBD',
+        'prinary-blue': '#004B93'
+      },
+      borderWidth: {
+        'thin': '1px',
+        'medium': '2px',
+        'thick': '4px',
+      },
       colors: {
-        primary: {
-          "50":"#eff6ff",
-          "100":"#dbeafe",
-          "200":"#bfdbfe",
-          "300":"#93c5fd",
-          "400":"#60a5fa",
-          "500":"#3b82f6",
-          "600":"#2563eb",
-          "700":"#1d4ed8",
-          "800":"#1e40af",
-          "900":"#1e3a8a",
-          "950":"#172554"
-        },
-        boxShadow: {
-          'gray-shadow': '0px 4px 4px 0px #00000040',
-          'black-shadow': '0px 4px 4px 0px #00000080',
-          'blur': '0px 0px 4px 0px #00000080',
-          'blur-btn': '0px 0px 4px 0px #00000040',
-        },
-        backgroundColor: {
-          'primary-red': '#B5013E',
-          'primary-dark-blue': '#0583D2',
-          'primary-light-blue': '#B8E3FF',
-          'primary-orange': '#FF9715',
-        },
-        colors: {
-          'primary-red': '#B5013E',
-          'primary-dark-blue': '#0583D2',
-          'primary-light-blue': '#B8E3FF',
-          'primary-orange': '#FF9715',
-        },
-      }
+        'primary-red': '#B5013E',
+        'primary-light-red': '#CD5C5C',
+        'primary-blue': '#0B3C5D',
+        'primary-yellow': '#F2B705',
+        'primary-green': '#2ECC71',
+        'primary-gray': '#F2F2F2',
+        'primary-black': '#000000',
+        'prinary-dark-gray': '#BDBDBD',
+        'primary-white': '#FFFFFF',
+      },
     },
     fontFamily: {
       'body': [

@@ -20,6 +20,14 @@ public class CustomUserDetails implements UserDetails {
     public boolean isActivated() {
         return user.isActive();
     }
+
+    public String getFullName() {
+        return user.getLastName() + " " + user.getFirstName();
+    }
+
+    public String getEmail() {
+        return user.getEmail();
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(user.getRole().name()));
@@ -32,7 +40,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return user.getUsername();
     }
 
     @Override

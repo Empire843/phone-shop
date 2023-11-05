@@ -6,45 +6,53 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import ptit.tttn.phoneshop.services.AwsS3Service;
 
 import java.io.IOException;
 
 @RestController
 public class AwsS3Controller {
     @Autowired
-    private AmazonS3 s3Client;
-
-    @Value("${cloud.aws.s3.bucket}")
-    private String bucketName;
-
+    private AwsS3Service awsS3Service;
     @PostMapping("/uploadFile")
     public ModelAndView uploadFile(@RequestParam("file") MultipartFile file) {
-        ModelAndView mav = new ModelAndView("redirect:/success");
+        ModelAndView mav = new ModelAndView("success");
         try {
-            ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setContentLength(file.getSize());
-
-            String fileExtension = StringUtils.getFilenameExtension(file.getOriginalFilename());
-            if (fileExtension != null) {
-                String contentType = "image/" + fileExtension;
-                metadata.setContentType(contentType);
-            }
-            String fileName = "images/" + file.getOriginalFilename();
-            s3Client.putObject(new PutObjectRequest(bucketName, fileName, file.getInputStream(), metadata)
-                    .withCannedAcl(CannedAccessControlList.PublicRead));
-
-            String fileUrl = s3Client.getUrl(bucketName, fileName).toString();
-            System.out.println("File URL: " + fileUrl);
+            String fileUrl = awsS3Service.uploadFile(file, "images");
             mav.addObject("url", fileUrl);
         } catch (Exception e) {
-            e.printStackTrace();
+            mav.setViewName("error");
+            mav.addObject("errorMessage", "Upload failed: " + e.getMessage());
+            return mav;
         }
         return mav;
     }
+    @DeleteMapping("/deleteFile")
+    public ModelAndView deleteFile(@RequestParam("url") String fileUrl) {
+        ModelAndView mav = new ModelAndView("success");
+        try {
+            awsS3Service.deleteFile(fileUrl);
+        } catch (Exception e) {
+            mav.setViewName("error");
+            mav.addObject("errorMessage", "Delete failed: " + e.getMessage());
+            return mav;
+        }
+        return mav;
+    }
+
+    @GetMapping("/success")
+    public ModelAndView success() {
+        ModelAndView mav = new ModelAndView("success");
+        return mav;
+    }
+    @GetMapping("/error")
+    public ModelAndView error() {
+        ModelAndView mav = new ModelAndView("error");
+        return mav;
+    }
+
 }
 //https://imagephoneshop.s3.amazonaws.com/images/Screenshot+2023-07-26+232348.png

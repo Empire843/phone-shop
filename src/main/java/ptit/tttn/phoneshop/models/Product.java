@@ -2,6 +2,7 @@ package ptit.tttn.phoneshop.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,17 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
     private String description;
-    private Double price;
     private Integer quantity;
+    private DateTime create_at;
+    private DateTime update_at;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", brand='" + brand + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

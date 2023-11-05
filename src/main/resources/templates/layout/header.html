@@ -1,0 +1,121 @@
+<div th:fragment="header(fullname, email)" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <nav class="relative bg-white dark:bg-gray-900  w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a  class="flex items-center object-cover">
+                <img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                     class="w-full h-16 mr-3 object-cover" alt="Flowbite Logo">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Shopping</span>
+            </a>
+            <div class="flex md:order-2 items-center">
+                <div class="relative  text-left flex items-center gap-3">
+                    <div th:if="${#authorization.expression('isAuthenticated()')}" class="flex items-center gap-5">
+                        <div th:if="${#authorization.expression('isAuthenticated()')}">
+                            <a>
+                                <span sec:authentication="principal.username"></span>
+                            </a>
+                        </div>
+                        <button class=" border-gray-300 border-separate rounded-full">
+                            <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown"
+                                 data-dropdown-placement="bottom-start" class="w-10 h-10  cursor-pointer p-1.5"
+                                 src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png "
+                                 alt="User dropdown">
+                        </button>
+                        <!-- Dropdown menu -->
+                        <!-- <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                  <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
+                          aria-hidden="true">&rarr;</span></a>
+              </div> -->
+                        <div id="userDropdown"
+                             class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+                                <div class="font-medium truncate">name@flowbite.com</div>
+                            </div>
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
+                                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <li>
+                                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
+                                    </li>
+                                </div>
+<!--                                <div th:if="${#authorization.expression('@customUserDetails.isAdmin()')}">-->
+<!--                                        <li>-->
+<!--                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>-->
+<!--                                        </li>-->
+<!--&lt;!&ndash;                                    <div th:unless="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">&ndash;&gt;-->
+<!--&lt;!&ndash;                                        &lt;!&ndash; Hiển thị nội dung cho người dùng khác &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
+<!--                                </div>-->
+
+                                <li>
+                                    <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Profile</a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
+                                </li>
+                                <li>
+                                    <a href="#"
+                                       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                                </li>
+                            </ul>
+                            <div class="py-1">
+                                <a th:href="@{/logout}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                    Sign out
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:unless="${#authorization.expression('isAuthenticated()')}">
+                        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                            <a th:href="@{/login}" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
+                                    aria-hidden="true">&rarr;</span></a>
+                        </div>
+                    </div>
+<!--                    <button class="w-7"><a href="user/cart"><img class="w-full" src="/images/cart_icon.svg" alt=""></a></button>-->
+                    <div class="ml-4 flow-root lg:ml-6">
+                        <a href="user/cart" class="group -m-2 flex items-center p-2">
+                            <svg class="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                            </svg>
+                            <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                            <span class="sr-only">items in cart, view bag</span>
+                        </a>
+                    </div>
+
+                    <!-- <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                  <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
+                          aria-hidden="true">&rarr;</span></a>
+              </div> -->
+                </div>
+
+            </div>
+            <div class="items-center justify-between hidden] md:flex md:w-auto md:order-1" id="navbar-sticky">
+
+                <form class="w-[500px] flex items-center">
+                    <label for="simple-search" class="sr-only">Search</label>
+                    <div class="relative w-full">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
+                            </svg>
+                        </div>
+                        <input type="text" id="simple-search"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Search branch name..." required>
+                    </div>
+                    <button type="submit"
+                            class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                             viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
+                        <span class="sr-only">Search</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</div>

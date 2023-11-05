@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -16,13 +17,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.util.Properties;
+
 @Configuration
 @EnableWebSecurity
-@PropertySource("classpath:application.properties")
 public class SecurityConfig {
     @Autowired
     private UserDetailsService userDetailsService;
     private WebSecurity web;
+
     @Autowired
     public void configureGlobal(@NotNull AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
@@ -43,22 +46,26 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll();
-//                .requestMatchers("/admin/**").hasAuthority("ADMIN")
-//                .requestMatchers("/user/**").hasAnyAuthority("USER","ADMIN")
-//                .requestMatchers("/register").permitAll()
-//                .requestMatchers("/account/register").permitAll()
-//                .anyRequest().permitAll()
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .loginProcessingUrl("/login")
-//                .defaultSuccessUrl("/")
-//                .and().logout().permitAll()
-//                .and()
-//                .rememberMe()
-//                .key("qetrydthujijktdtryuhertyhter2346")
-//                .tokenValiditySeconds(7 * 24 * 60 * 60);
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                .requestMatchers("/").permitAll()
+                .requestMatchers("/email/**").permitAll()
+                .requestMatchers("/register").permitAll()
+                .requestMatchers("/account/register").permitAll()
+                .anyRequest().permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/")
+                .and()
+                .logout()
+                .permitAll()
+                .and()
+                .rememberMe(rememberMe -> rememberMe
+                        .key("uniqueAndSecret")
+                        .tokenValiditySeconds(7 * 24 * 60 * 60)
+                );
         return http.build();
     }
 }
