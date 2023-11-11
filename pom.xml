@@ -17,7 +17,8 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
-<!--        <dependency>-->
+        <!-- Thêm vào file pom.xml nếu bạn sử dụng Maven -->
+        <!--        <dependency>-->
 <!--            <groupId>software.amazon.awssdk</groupId>-->
 <!--            <artifactId>s3</artifactId>-->
 <!--            <version>2.17.88</version>-->

@@ -12,17 +12,19 @@ import org.springframework.web.servlet.ModelAndView;
 import ptit.tttn.phoneshop.services.AwsS3Service;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 public class AwsS3Controller {
     @Autowired
     private AwsS3Service awsS3Service;
     @PostMapping("/uploadFile")
-    public ModelAndView uploadFile(@RequestParam("file") MultipartFile file) {
+    public ModelAndView uploadFile(@RequestParam("file") MultipartFile[] files) {
         ModelAndView mav = new ModelAndView("success");
         try {
-            String fileUrl = awsS3Service.uploadFile(file, "images");
-            mav.addObject("url", fileUrl);
+//            String fileUrl = awsS3Service.uploadFile(files, "images");
+            List<String> urls = awsS3Service.uploadMultipleFile(files, "images");
+            mav.addObject("urls", urls);
         } catch (Exception e) {
             mav.setViewName("error");
             mav.addObject("errorMessage", "Upload failed: " + e.getMessage());

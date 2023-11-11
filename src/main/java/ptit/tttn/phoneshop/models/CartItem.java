@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -23,8 +24,8 @@ public class CartItem {
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;
-    private DateTime create_at;
-    private DateTime update_at;
+    private LocalDateTime create_at;
+    private LocalDateTime update_at;
 
     @Override
     public String toString() {

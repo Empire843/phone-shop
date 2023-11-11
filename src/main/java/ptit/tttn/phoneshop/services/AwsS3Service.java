@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class AwsS3Service {
@@ -43,7 +45,32 @@ public class AwsS3Service {
        }
        return fileUrl;
    }
+    public List<String> uploadMultipleFile(MultipartFile[] files, String path) {
+        List<String> urls = new ArrayList<>();
+        String fileUrl = "";
+        try {
+            for (MultipartFile file : files) {
+                ObjectMetadata metadata = new ObjectMetadata();
+                metadata.setContentLength(file.getSize());
 
+                String fileExtension = StringUtils.getFilenameExtension(file.getOriginalFilename());
+                if (fileExtension != null) {
+                    String contentType = "image/" + fileExtension;
+                    metadata.setContentType(contentType);
+                }
+                String fileName = path + "/" + file.getOriginalFilename();
+                s3Client.putObject(new PutObjectRequest(bucketName, fileName, file.getInputStream(), metadata)
+                        .withCannedAcl(CannedAccessControlList.PublicRead));
+
+                fileUrl = s3Client.getUrl(bucketName, fileName).toString();
+                urls.add(fileUrl);
+                System.out.println("File URL: " + fileUrl);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Fail to upload file");
+        }
+        return urls;
+    }
     public void deleteFile(String fileUrl) {
         try {
             String decodedUrl = URLDecoder.decode(fileUrl, "UTF-8");

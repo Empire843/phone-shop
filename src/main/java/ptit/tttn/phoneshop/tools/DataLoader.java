@@ -1,6 +1,5 @@
 package ptit.tttn.phoneshop.tools;
 
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Component;
 import ptit.tttn.phoneshop.models.Role;
 import ptit.tttn.phoneshop.models.User;
 import ptit.tttn.phoneshop.repositories.UserRepository;
-import ptit.tttn.phoneshop.services.UserService;
 
 @Component
 public class DataLoader implements ApplicationRunner {

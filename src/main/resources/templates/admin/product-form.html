@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Product</title>
+    <!-- Include the Tailwind CSS CDN -->
+
+    <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+        .font-family-karla { font-family: karla; }
+        .bg-sidebar { background: #3d68ff; }
+        .cta-btn { color: #3d68ff; }
+        .upgrade-btn { background: #1947ee; }
+        .upgrade-btn:hover { background: #0038fd; }
+        .active-nav-link { background: #1947ee; }
+        .nav-item:hover { background: #1947ee; }
+        .account-link:hover { background: #3d68ff; }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+<div class="flex">
+    <div th:replace="~{admin/common/sidebar :: sidebar}"></div>
+    <div class="container w-full p-4">
+        <div class="border-black w-full mx-auto">
+            <div class="flex ">
+                <a href="/admin/product-management" class="h-fit bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">back</a>
+                <h1 class="text-2xl font-bold mb-4">Add New Product</h1>
+            </div>
+            <form th:unless="${product}" action="/admin/product-management/add-product" method="post" class="max-w-lg border border-black rounded-lg p-5 bg-white" enctype="multipart/form-data">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="product-name">
+                        Product Name
+                    </label>
+                    <input name="name" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="text" placeholder="Product Name">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="brand">
+                        Brand
+                    </label>
+                    <input name="brand" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Brand">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="brand">
+                        Price
+                    </label>
+                    <input name="price" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="text" placeholder="Price">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+                        Description
+                    </label>
+                    <textarea name="description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  placeholder="Description"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="category">
+                        Category
+                    </label>
+                    <select name="categoryId" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                        <option th:each="cate : ${categories}" th:text="${cate.name}" th:value="${cate.id}"></option>
+                    </select>
+                </div>
+                <div class="mb-4" id="color-inputs">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">
+                        Colors
+                    </label>
+                    <div id="color-input-1" class="flex mb-2">
+                        <input name="colors[0]" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Color name">
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <button type="button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="addColorField()">
+                        Add Color
+                    </button>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="product-image">
+                        Product Image
+                    </label>
+                    <input type="file" name="files" id="product-image" multiple="multiple"/>
+                </div>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Add Product
+                </button>
+            </form>
+            <form th:if="${product}" action="/admin/product-management/add-product" method="post" class="max-w-lg border border-black rounded-lg p-5 bg-white" enctype="multipart/form-data">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="product-name">
+                        Product Name
+                    </label>
+                    <input th:value="${product.name}" name="name" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="product-name" type="text" placeholder="Product Name">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="brand">
+                        Brand
+                    </label>
+                    <input th:value="${product.brand}" name="brand" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="brand" type="text" placeholder="Brand">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="brand">
+                        Price
+                    </label>
+                    <input th:value="${product.price}" name="price" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" type="text" placeholder="Price">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+                        Description
+                    </label>
+                    <textarea name="description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" placeholder="Description"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="category">
+                        Category
+                    </label>
+                    <select name="categoryId" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" id="category">
+                        <option th:selected="${cate.id == product.category.id}" th:each="cate : ${categories}" th:text="${cate.name}" th:value="${cate.id}"></option>
+                    </select>
+                </div>
+                <div class="mb-4" id="color-inputs1">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="color">
+                        Colors
+                    </label>
+                    <div class="flex mb-2">
+                        <input id="color" name="colors[0]" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Color name">
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <button type="button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="addColorField()">
+                        Add Color
+                    </button>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="product-image">
+                        Product Image
+                    </label>
+                    <input type="file" name="files" id="product-image1" multiple="multiple"/>
+                </div>
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                    Add Product
+                </button>
+            </form>
+            <div th:if="${message}" class="bg-green-300 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline" th:text="${message}"></span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                        <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        </svg>
+                    </span>
+            </div>
+            <div th:if="${error}" class="bg-green-300 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <span class="block sm:inline" th:text="${error}"></span>
+                <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                        <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        </svg>
+                    </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let colorCount = 0;
+
+    function addColorField() {
+        colorCount++;
+        const colorInputs = document.getElementById('color-inputs');
+        const newColorField = document.createElement('div');
+        newColorField.id = `color-input-${colorCount}`;
+        newColorField.classList.add('flex', 'mb-2');
+        newColorField.innerHTML = `
+                <input name="colors[${colorCount}]" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Color name">
+                <button type="button" class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" onclick="removeColorField('color-input-${colorCount}')">
+                    Remove
+                </button>
+            `;
+        colorInputs.appendChild(newColorField);
+    }
+
+    function removeColorField(id) {
+        const element = document.getElementById(id);
+        element.parentNode.removeChild(element);
+    }
+</script>
+</body>
+</html>

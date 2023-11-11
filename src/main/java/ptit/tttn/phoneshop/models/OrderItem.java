@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 @Entity
 @Table(name = "order_items")
@@ -20,8 +21,8 @@ public class OrderItem {
     private int quantity;
     private double price;
     private double total;
-    private DateTime create_at;
-    private DateTime update_at;
+    private LocalDateTime create_at;
+    private LocalDateTime update_at;
 
     @ManyToOne
     @JoinColumn(name = "product_id", referencedColumnName = "id")

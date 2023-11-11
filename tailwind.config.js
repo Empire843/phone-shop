@@ -31,7 +31,7 @@ module.exports = {
         'primary-green': '#2ECC71',
         'primary-gray': '#F2F2F2',
         'primary-black': '#000000',
-        'prinary-dark-gray': '#BDBDBD',
+        'primary-dark-gray': '#BDBDBD',
         'primary-white': '#FFFFFF',
       },
     },

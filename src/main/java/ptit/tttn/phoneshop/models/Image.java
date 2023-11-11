@@ -2,15 +2,18 @@ package ptit.tttn.phoneshop.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 @Entity
 @Data
 @NoArgsConstructor
 @Table(name = "images")
 @AllArgsConstructor
+@Builder
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +22,8 @@ public class Image {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
-    private DateTime create_at;
-    private DateTime update_at;
+    private LocalDateTime create_at;
+    private LocalDateTime update_at;
 
     @Override
     public String toString() {

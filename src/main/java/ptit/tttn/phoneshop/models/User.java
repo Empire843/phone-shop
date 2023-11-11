@@ -2,9 +2,11 @@ package ptit.tttn.phoneshop.models;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.joda.time.DateTime;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -25,17 +27,20 @@ public  class User {
     private Role role;
     private boolean active;
     private boolean verify;
-    private DateTime verify_at;
+    private LocalDateTime verifyAt;
     private String avatar;
     private String phone;
     private String description;
-    private DateTime create_at;
-    private DateTime update_at;
+    private LocalDateTime createAt;
+    private LocalDateTime updateAt;
+    private String token;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date tokenExpirationDate;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<DeliveryAddress> deliveryAddresses = new ArrayList<>();
 
-    public User(String lastName, String firstName, String username, String email, String password, Role role, boolean active, boolean verify, DateTime verify_at, String avatar, String phone, String description, DateTime create_at, DateTime update_at) {
+    public User(String lastName, String firstName, String username, String email, String password, Role role, boolean active, boolean verify, LocalDateTime verifyAt, String avatar, String phone, String description, LocalDateTime createAt, LocalDateTime updateAt) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.username = username;
@@ -44,12 +49,12 @@ public  class User {
         this.role = role;
         this.active = active;
         this.verify = verify;
-        this.verify_at = verify_at;
+        this.verifyAt = verifyAt;
         this.avatar = avatar;
         this.phone = phone;
         this.description = description;
-        this.create_at = create_at;
-        this.update_at = update_at;
+        this.createAt = createAt;
+        this.updateAt = updateAt;
     }
 
     @Override
@@ -64,12 +69,12 @@ public  class User {
                 ", role=" + role +
                 ", active=" + active +
                 ", verify=" + verify +
-                ", verify_at=" + verify_at +
+                ", verify_at=" + verifyAt +
                 ", avatar='" + avatar + '\'' +
                 ", phone='" + phone + '\'' +
                 ", description='" + description + '\'' +
-                ", create_at=" + create_at +
-                ", update_at=" + update_at +
+                ", create_at=" + createAt +
+                ", update_at=" + updateAt +
                 '}';
     }
 }

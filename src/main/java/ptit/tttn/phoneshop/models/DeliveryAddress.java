@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 @Entity
 @Table(name = "address")
@@ -23,8 +24,8 @@ public class DeliveryAddress {
     private String city;
     private String district;
     private String ward;
-    private DateTime create_at;
-    private DateTime update_at;
+    private LocalDateTime create_at;
+    private LocalDateTime update_at;
 
 
     @ManyToOne

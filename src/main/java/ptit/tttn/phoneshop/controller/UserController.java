@@ -1,6 +1,7 @@
 package ptit.tttn.phoneshop.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -13,10 +14,15 @@ public class UserController {
     private static final String USER_SHOP = "user/shop";
     private static final String USER_WISHLIST = "user/wishlist";
 
-    @RequestMapping("/home")
-    public String userHome() {
-        return USER_HOME;
+//    @GetMapping("/home")
+//    public String userHome() {
+//        return USER_HOME;
+//    }
+    @GetMapping("/change-password")
+    public String changePassword() {
+        return "user/change-password";
     }
+
 
 
 }

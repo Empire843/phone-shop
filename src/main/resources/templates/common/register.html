@@ -50,11 +50,20 @@
                             <label for="terms" class="font-light text-gray-500 dark:text-gray-300">I accept the <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
                         </div>
                     </div>
-                    <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create an account</button>
+                    <button type="submit" class="w-full text-white bg-blue-500 hover:bg-prinary-blue focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create an account</button>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                         Already have an account? <a th:href="@{login}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>
                     </p>
                 </form>
+                <div th:if="${errorMessage}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <strong class="font-bold">Lỗi!</strong>
+                    <span class="block sm:inline" th:text="${errorMessage}"></span>
+                    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                        <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <!-- SVG for close icon -->
+                        </svg>
+                    </span>
+                </div>
             </div>
         </div>
     </div>

@@ -63,7 +63,7 @@ public class SecurityConfig {
                 .permitAll()
                 .and()
                 .rememberMe(rememberMe -> rememberMe
-                        .key("uniqueAndSecret")
+                        .key("uniqueAnjklghyfddSecret")
                         .tokenValiditySeconds(7 * 24 * 60 * 60)
                 );
         return http.build();

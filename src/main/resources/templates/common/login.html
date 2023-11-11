@@ -34,7 +34,22 @@
             </div>
         </form>
         <div th:if="${param.error}" class="w-11/12 bg-primary-light-red h-12 text-start font-normal">
-            <span class="text-red-800">Login failed! Please check your username or password again!</span>
+            <span class="text-white">Login failed! Please check your username or password again!</span>
+        </div>
+        <div th:if="${param.error}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <span class="text-white block sm:inline">Login failed! Please check your username or password again!</span>
+            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                        <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <!-- SVG for close icon -->
+                        </svg>
+                    </span>
+        </div>
+        <div th:if="${message}" class="bg-green-300 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <span class="block sm:inline" th:text="${message}"></span>
+            <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+                        <svg class="fill-current h-6 w-6 text-red-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        </svg>
+                    </span>
         </div>
         <div class="flex justify-between mt-10">
             <p class="text-center text-sm text-gray-500">
