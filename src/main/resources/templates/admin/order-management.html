@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <meta name="author" content="David Grzyb">
+    <meta name="description" content="">
+
+    <!-- Tailwind -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
+        .font-family-karla { font-family: karla; }
+        .bg-sidebar { background: #3d68ff; }
+        .cta-btn { color: #3d68ff; }
+        .upgrade-btn { background: #1947ee; }
+        .upgrade-btn:hover { background: #0038fd; }
+        .active-nav-link { background: #1947ee; }
+        .nav-item:hover { background: #1947ee; }
+        .account-link:hover { background: #3d68ff; }
+    </style>
+</head>
+<body class="bg-gray-100 font-family-karla flex">
+<div th:replace="~{admin/common/sidebar :: sidebar}"></div>
+<div class="w-full flex flex-col h-screen overflow-y-hidden">
+    <!-- Desktop Header -->
+    <div>
+
+    </div>
+    <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
+        <div class="w-1/2"></div>
+        <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
+            <button @click="isOpen = !isOpen" class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
+                <img src="https://source.unsplash.com/uJ8LNVCBjFQ/400x400">
+            </button>
+            <button x-show="isOpen" @click="isOpen = false" class="h-full w-full fixed inset-0 cursor-default"></button>
+            <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
+                <a href="#" class="block px-4 py-2 account-link hover:text-white">Account</a>
+                <a href="#" class="block px-4 py-2 account-link hover:text-white">Support</a>
+                <a th:href="@{/logout}" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Header & Nav -->
+    <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
+        <div class="flex items-center justify-between">
+            <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
+            <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
+                <i x-show="!isOpen" class="fas fa-bars"></i>
+                <i x-show="isOpen" class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Dropdown Nav -->
+        <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
+            <a href="index.html" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
+                <i class="fas fa-tachometer-alt mr-3"></i>
+                Dashboard
+            </a>
+            <a href="blank.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <i class="fas fa-sticky-note mr-3"></i>
+                Blank Page
+            </a>
+            <a href="tables.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <i class="fas fa-table mr-3"></i>
+                Tables
+            </a>
+            <a href="forms.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <i class="fas fa-align-left mr-3"></i>
+                Forms
+            </a>
+            <a href="tabs.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <i class="fas fa-tablet-alt mr-3"></i>
+                Tabbed Content
+            </a>
+            <a href="calendar.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <i class="fas fa-calendar mr-3"></i>
+                Calendar
+            </a>
+            <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <i class="fas fa-cogs mr-3"></i>
+                Support
+            </a>
+            <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <i class="fas fa-user mr-3"></i>
+                My Account
+            </a>
+            <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                <i class="fas fa-sign-out-alt mr-3"></i>
+                Sign Out
+            </a>
+            <button class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!
+            </button>
+        </nav>
+    </header>
+
+    <div class="w-full overflow-x-hidden border-t flex flex-col">
+        <main class="w-full flex-grow p-6">
+            <h1 class="text-3xl text-black pb-6">Dashboard</h1>
+
+            <div class="w-full mt-12">
+                <div class="flex justify-between items-center mb-4">
+                    <p class="text-xl pb-3 flex items-center">
+                        <i class="fas fa-list mr-3"></i> Latest Reports
+                    </p>
+                    <form class="w-1/3 flex items-center" method="post" action="/admin/order-management/search-by-user-name">
+                        <label for="simple-search" class="sr-only">Search</label>
+                        <div class="relative w-full">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
+                                </svg>
+                            </div>
+                            <input name="searchKeyWord" type="text" id="simple-search"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                   placeholder="Search name..." required>
+                        </div>
+                        <button type="submit"
+                                class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                 viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                            <span class="sr-only">Search</span>
+                        </button>
+                    </form>
+                </div>
+                <div class="bg-white overflow-auto">
+                    <table class="min-w-full bg-white">
+                        <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Index</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Order ID</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">User</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Order Date</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Total Item</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Total Price</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Order Status</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Delivery Date</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                        <tr th:each="order, index :${orders}">
+                            <td class="text-left py-3 px-4 uppercase font-semibold text-sm" th:text="${index.index + 1}"></td>
+                            <td class="text-left py-3 px-4 uppercase font-semibold text-sm" th:text="${order.getId()}">
+                            </td>
+                            <td class="text-left py-3 px-4 uppercase font-semibold text-sm" th:text="${order.getUser.getLastName()} + ' ' + ${order.getUser.getFirstName()}">Full name</td>
+                            <td class="text-left py-3 px-4 uppercase font-semibold text-sm"th:text="${#temporals.format(order.getOrderDate(), 'dd/MM/yyyy HH:mm')}">Full name</td>
+                            <td class="text-left py-3 px-4 uppercase font-semibold text-sm" th:text="${order.getOrderItems.size()}">Email</td>
+                            <td class="text-left py-3 px-4 uppercase font-semibold text-sm" th:text="${#numbers.formatDecimal(order.getTotal(), 0, 'COMMA', 0, 'POINT')} + ' VND'">Email</td>
+                            <td class="text-left py-3 px-4 uppercase font-semibold text-sm" th:text="${order.getOrderStatus()}">Username</td>
+                            <td class="text-left py-3 px-4 uppercase font-semibold text-sm"  th:text="${#temporals.format(order.getDeliveryDate(), 'dd/MM/yyyy HH:mm')}">Phone Number</td>
+                            <td class="text-left py-3 px-4 uppercase font-semibold text-sm flex gap-2">
+                                <a th:href="'/order/' + ${order.getId()}" class=" text-center block hover:bg-blue-500 hover:text-white text-blue-400  underline border rounded-lg px-3 py-2">View</a>
+                                <a th:href="'/admin/order-management/delete/' + ${order.getId()}" class=" text-center block hover:bg-blue-500 hover:text-white text-blue-400  underline border rounded-lg px-3 py-2">Delete</a>
+
+                                <button  th:data-order-id="${order.getId()}"
+                                            data-modal-target="crud-modal" data-modal-toggle="crud-modal"
+                                            class="font-semibold uppercase text-center block hover:bg-blue-500 hover:text-white  text-blue-400  underline border rounded-lg px-3 py-2"
+                                            type="button">
+                                        Update status
+                                </button>
+                                <div id="crud-modal" tabindex="-1" aria-hidden="true"
+                                     class="hidden bg-opacity-50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                    <div class="relative p-4 w-full max-w-md max-h-full">
+                                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 w-[500px]">
+                                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                                    Update status
+                                                </h3>
+                                                <button type="button"
+                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                        data-modal-toggle="crud-modal">
+                                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                         fill="none" viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                              stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                    </svg>
+                                                    <span class="sr-only">Close modal</span>
+                                                </button>
+                                            </div>
+                                            <form class="p-4 md:p-5 " method="post" th:action="'/admin/order-management/update-status/'+${order.getId()}" id="status">
+                                                <div class="grid gap-4 mb-4 grid-cols-2">
+                                                    <div class="col-span-2">
+                                                        <label for="orderStatus"
+                                                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                                        <select id="orderStatus" name="orderStatus" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                                            <option value="PENDING">PENDING</option>
+                                                            <option value="PROCESSING">PROCESSING</option>
+                                                            <option value="SHIPPING">SHIPPING</option>
+                                                            <option value="DONE">DONE</option>
+                                                            <option value="CANCELLED">CANCELLED</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <button type="submit"
+                                                        class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                                         xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd"
+                                                              d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                                              clip-rule="evenodd"></path>
+                                                    </svg>
+                                                    Update
+                                                </button>
+                                            </form>
+                                            <script>
+                                                document.querySelectorAll('[data-order-id]').forEach(button => {
+                                                    button.addEventListener('click', function() {
+                                                        let orderId = this.getAttribute('data-order-id');
+                                                        document.querySelector('#status').action = '/admin/order-management/update-status/' + orderId;
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+        <footer class="w-full bg-white text-right p-4">
+            Built by <a target="_blank" href="https://davidgrzyb.com" class="underline">David Grzyb</a>.
+        </footer>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+<!-- AlpineJS -->
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<!-- Font Awesome -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+<!-- ChartJS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

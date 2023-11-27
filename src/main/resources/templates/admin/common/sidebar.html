@@ -1,4 +1,5 @@
 <div th:fragment="sidebar" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <aside class="relative bg-sidebar h-screen w-64 hidden sm:block shadow-xl">
         <div class="p-6">
             <a href="#" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
@@ -12,33 +13,38 @@
                 Dashboard
             </a>
             <a href="/admin/product-management" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-sticky-note mr-3"></i>
-                Product Management
+                <i class="fa-solid fa-landmark mr-3"></i>
+                Product
             </a>
             <a href="/admin/category-management" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-sticky-note mr-3"></i>
-                Category Management
+                <i class="fa-solid fa-landmark mr-3"></i>
+                Category
             </a>
-            <a th:href="@{/admin/table.html}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-table mr-3"></i>
-                Tables
+            <a href="/admin/order-management" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
+                <i class="fa-solid fa-landmark mr-3"></i>
+                Order
             </a>
-            <a href="/admin/dashboard" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-align-left mr-3"></i>
-                Forms
-            </a>
-            <a href="/admin/dashboard" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-tablet-alt mr-3"></i>
-                Tabbed Content
-            </a>
-            <a href="/admin/dashboard" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">
-                <i class="fas fa-calendar mr-3"></i>
-                Calendar
-            </a>
+<!--            <a th:href="@{/admin/table.html}" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">-->
+<!--                <i class="fas fa-table mr-3"></i>-->
+<!--                Tables-->
+<!--            </a>-->
+<!--            <a href="/admin/dashboard" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">-->
+<!--                <i class="fas fa-align-left mr-3"></i>-->
+<!--                Forms-->
+<!--            </a>-->
+<!--            <a href="/admin/dashboard" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">-->
+<!--                <i class="fas fa-tablet-alt mr-3"></i>-->
+<!--                Tabbed Content-->
+<!--            </a>-->
+<!--            <a href="/admin/dashboard" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item">-->
+<!--                <i class="fas fa-calendar mr-3"></i>-->
+<!--                Calendar-->
+<!--            </a>-->
         </nav>
         <a href="#" class="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4">
             <i class="fas fa-arrow-circle-up mr-3"></i>
             Upgrade to Pro!
         </a>
     </aside>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
 </div>

@@ -40,6 +40,11 @@ public  class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<DeliveryAddress> deliveryAddresses = new ArrayList<>();
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    private Cart cart;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Order> orders;
     public User(String lastName, String firstName, String username, String email, String password, Role role, boolean active, boolean verify, LocalDateTime verifyAt, String avatar, String phone, String description, LocalDateTime createAt, LocalDateTime updateAt) {
         this.lastName = lastName;
         this.firstName = firstName;
@@ -65,7 +70,6 @@ public  class User {
                 ", firstName='" + firstName + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", role=" + role +
                 ", active=" + active +
                 ", verify=" + verify +

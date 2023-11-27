@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.joda.time.LocalDateTime;
+
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -19,7 +20,7 @@ public class Color {
     private Long id;
     private String colorName;
     private String colorCode;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private Product product;
     private LocalDateTime create_at;

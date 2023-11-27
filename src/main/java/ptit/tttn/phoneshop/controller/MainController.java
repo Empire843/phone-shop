@@ -12,9 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ptit.tttn.phoneshop.models.Category;
 import ptit.tttn.phoneshop.request.RegisterRequest;
+import ptit.tttn.phoneshop.services.CategoryService;
+import ptit.tttn.phoneshop.services.ProductService;
 import ptit.tttn.phoneshop.services.UserService;
 import ptit.tttn.phoneshop.services.implement.EmailSenderImpl;
+
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class MainController {
@@ -30,13 +36,24 @@ public class MainController {
     @Autowired
     private UserService userService;
     @Autowired
+    private ProductService productService;
+    @Autowired
+    private CategoryService categoryService;
+    @Autowired
     private EmailSenderImpl emailSender;
     @GetMapping(value = {"/", "/home", "/index"})
-    public String home() {
+    public String home(Model model, RedirectAttributes redirectAttributes) {
+        HashMap<Object, Object> response = new HashMap<>();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if ("ADMIN".equals(auth.getAuthorities().toArray()[0].toString())) {
             return "redirect:/admin/dashboard";
         }
+        List<Category> categories = categoryService.getAllCategory();
+        for (int i = 0; i < Math.min(3, categories.size()); i++) {
+            Category category = categories.get(i);
+            response.put(category, productService.getProductByCategoryLimited(category.getId(), 4));
+        }
+        model.addAttribute("response", response);
         return HOME_PAGE;
     }
     @GetMapping("/login")
@@ -81,10 +98,24 @@ public class MainController {
         }
     }
     @GetMapping("/forgot-password")
-    public String forgotPassword() {
+    public String forgotPasswordPage() {
         return "common/forgot_password";
     }
-
+    @PostMapping("/forgot-password")
+    public String forgotPassword(@RequestParam("email") String email, @RequestParam("username") String username,
+                                 RedirectAttributes redirectAttributes, Model model) {
+        if (email != null && username != null) {
+            try {
+                userService.sendResetPasswordEmail(email, username);
+                model.addAttribute("message", "Send email successfully");
+                redirectAttributes.addFlashAttribute("message", "Send email successfully");
+            } catch (RuntimeException e) {
+                model.addAttribute("error", "Send email failed: "+e.getMessage());
+                redirectAttributes.addFlashAttribute("error", "Send email failed: "+e.getMessage());
+            }
+        }
+        return "redirect:/forgot-password";
+    }
     @GetMapping("/verify")
     public String verifyAccount(@RequestParam("token") String token, RedirectAttributes redir) {
         boolean verified = userService.verifyToken(token);

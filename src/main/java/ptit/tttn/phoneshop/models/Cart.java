@@ -2,27 +2,31 @@ package ptit.tttn.phoneshop.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDateTime;
+
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "carts")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private int quantity;
-    private double total;
-
-
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CartItem> cartItems = new ArrayList<>();
     private LocalDateTime create_at;
     private LocalDateTime update_at;
 
@@ -30,10 +34,14 @@ public class Cart {
     public String toString() {
         return "Cart{" +
                 "id=" + id +
-                ", quantity=" + quantity +
-                ", total=" + total +
                 ", create_at=" + create_at +
                 ", update_at=" + update_at +
                 '}';
+    }
+    public Double getTotalPrice(){
+        return cartItems.stream().mapToDouble(cartItem -> cartItem.getProduct().getPrice() * cartItem.getQuantity()).sum();
+    }
+    public Long getTotalQuantity(){
+        return cartItems.stream().mapToLong(CartItem::getQuantity).sum();
     }
 }

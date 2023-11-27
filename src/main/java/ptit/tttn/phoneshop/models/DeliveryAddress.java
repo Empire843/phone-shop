@@ -8,8 +8,11 @@ import lombok.NoArgsConstructor;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDateTime;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-@Table(name = "address")
+@Table(name = "delivery_addresses")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,6 +30,8 @@ public class DeliveryAddress {
     private LocalDateTime create_at;
     private LocalDateTime update_at;
 
+    @OneToMany(mappedBy = "deliveryAddress")
+    private List<Order> orders = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -45,5 +50,8 @@ public class DeliveryAddress {
                 ", create_at=" + create_at +
                 ", update_at=" + update_at +
                 '}';
+    }
+    public String getFullAddress() {
+        return this.addressDetails + ", " + this.ward + ", " + this.district + ", " + this.city;
     }
 }

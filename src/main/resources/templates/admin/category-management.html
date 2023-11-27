@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Quản lý sản phẩm</title>
+    <title>Admin - Category</title>
 
     <link rel="stylesheet" th:href="@{/css/main.css}" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet"><script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css?family=Karla:400,700&display=swap');
         .font-family-karla { font-family: karla; }
@@ -25,88 +27,191 @@
 <div class="flex">
     <div th:replace="~{admin/common/sidebar :: sidebar}"></div>
     <!-- Title -->
-    <div class="container mx-auto mt-10">
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-700">Quản lý loại sản phẩm</h1>
-        </div>
-
-        <!-- Actions -->
-        <div class="mb-4 flex justify-between">
-            <a href="/admin/category-management/add-category" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Thêm mới loại sản phẩm
-            </a>
-            <form class="w-[500px] flex items-center">
-                <label for="simple-search" class="sr-only">Search</label>
-                <div class="relative w-full">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
-                        </svg>
-                    </div>
-                    <input type="text" id="simple-search"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="Search ..." required>
-                </div>
-                <button type="submit"
-                        class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                         viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                    </svg>
-                    <span class="sr-only">Search</span>
+    <div class="w-full">
+        <header class="w-full items-center bg-white py-2 px-6 hidden sm:flex">
+            <div class="w-1/2"></div>
+            <div x-data="{ isOpen: false }" class="relative w-1/2 flex justify-end">
+                <button @click="isOpen = !isOpen" class="realtive z-10 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400 hover:border-gray-300 focus:border-gray-300 focus:outline-none">
+                    <img src="https://source.unsplash.com/uJ8LNVCBjFQ/400x400">
                 </button>
-            </form>
-        </div>
-
-        <!-- Product Table -->
-        <div class="bg-white shadow-md rounded my-6">
-            <table class="text-left w-full border-collapse">
-                <!-- Table Header -->
-                <thead>
-                <tr>
-                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Số thứ tự</th>
-                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Tên loại sản phẩm</th>
-                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Mô tả</th>
-                    <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Hành động</th>
-                </tr>
-                </thead>
-                <tbody>
-<!--                <li th:each="category : ${categories}">-->
-<!--                    <p th:text="${category.name}"></p>-->
-<!--                </li>-->
-                <!-- Product Row -->
-
-                <tr th:each="cate, index : ${categories}" class="hover:bg-grey-lighter">
-                    <td class="py-4 px-6 border-b border-grey-light" th:text="${index.index + 1}">1</td>
-                    <td class="py-4 px-6 border-b border-grey-light" th:text="${cate.name}">Cate name</td>
-                    <td class="py-4 px-6 border-b border-grey-light" th:text="${cate.description}">Description</td>
-                    <td class="py-4 px-6 border-b border-grey-light">
-                        <a th:href="@{'/admin/category-management/update/' + ${cate.id}}" class="text-blue-500 pr-4">Sửa</a>
-                        <a th:href="@{'/admin/category-management/delete/' + ${cate.id}}" class="text-red-500">Xóa</a>
-                    </td>
-                </tr>
-
-<!-- More Product Rows -->
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Pagination -->
-        <div class="flex justify-between items-center">
-            <div class="text-grey-dark">
-                Hiển thị 1 đến 10 của 100 sản phẩm
+                <button x-show="isOpen" @click="isOpen = false" class="h-full w-full fixed inset-0 cursor-default"></button>
+                <div x-show="isOpen" class="absolute w-32 bg-white rounded-lg shadow-lg py-2 mt-16">
+                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Account</a>
+                    <a href="#" class="block px-4 py-2 account-link hover:text-white">Support</a>
+                    <a th:href="@{/logout}" class="block px-4 py-2 account-link hover:text-white">Sign Out</a>
+                </div>
             </div>
-            <div class="inline-flex">
-                <button class="text-sm bg-grey-lighter hover:bg-grey rounded py-2 px-4">Trước</button>
-                <button class="text-sm bg-blue-500 hover:bg-blue-700 text-white rounded py-2 px-4">Sau</button>
+        </header>
+
+        <!-- Mobile Header & Nav -->
+        <header x-data="{ isOpen: false }" class="w-full bg-sidebar py-5 px-6 sm:hidden">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-white text-3xl font-semibold uppercase hover:text-gray-300">Admin</a>
+                <button @click="isOpen = !isOpen" class="text-white text-3xl focus:outline-none">
+                    <i x-show="!isOpen" class="fas fa-bars"></i>
+                    <i x-show="isOpen" class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Dropdown Nav -->
+            <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
+                <a href="index.html" class="flex items-center active-nav-link text-white py-2 pl-4 nav-item">
+                    <i class="fas fa-tachometer-alt mr-3"></i>
+                    Dashboard
+                </a>
+                <a href="blank.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-sticky-note mr-3"></i>
+                    Blank Page
+                </a>
+                <a href="tables.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-table mr-3"></i>
+                    Tables
+                </a>
+                <a href="forms.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-align-left mr-3"></i>
+                    Forms
+                </a>
+                <a href="tabs.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-tablet-alt mr-3"></i>
+                    Tabbed Content
+                </a>
+                <a href="calendar.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-calendar mr-3"></i>
+                    Calendar
+                </a>
+                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-cogs mr-3"></i>
+                    Support
+                </a>
+                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-user mr-3"></i>
+                    My Account
+                </a>
+                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
+                    <i class="fas fa-sign-out-alt mr-3"></i>
+                    Sign Out
+                </a>
+                <button class="w-full bg-white cta-btn font-semibold py-2 mt-3 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                    <i class="fas fa-arrow-circle-up mr-3"></i> Upgrade to Pro!
+                </button>
+            </nav>
+            <!-- <button class="w-full bg-white cta-btn font-semibold py-2 mt-5 rounded-br-lg rounded-bl-lg rounded-tr-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+                <i class="fas fa-plus mr-3"></i> New Report
+            </button> -->
+        </header>
+        <div class="container mx-auto mt-20">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-700">Category management</h1>
+            </div>
+
+            <!-- Actions -->
+            <div class="mb-4 flex justify-between">
+                <a href="/admin/category-management/add-category" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Add new Category
+                </a>
+                <form class="w-[500px] flex items-center">
+                    <label for="simple-search" class="sr-only">Search</label>
+                    <div class="relative w-full">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
+                            </svg>
+                        </div>
+                        <input type="text" id="simple-search"
+                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="Search ..." required>
+                    </div>
+                    <button type="submit"
+                            class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                             viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                        </svg>
+                        <span class="sr-only">Search</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Product Table -->
+            <div class="border border-l-8 border-primary-red w-full h-16 bg-red-100 flex justify-start items-center px-4 font-semibold text-primary-red" id="delete-faild-message" style="display: none;"><p>Category deleted failed!</p></div>
+            <div class="border border-l-8 border-blue-600 w-full h-16 bg-blue-100 flex justify-start items-center px-4 font-semibold text-blue-600" id="delete-success-message" style="display: none;"><p>Category deleted successfully!</p></div>
+            <div class="bg-white shadow-md rounded my-6">
+                <table class="text-left w-full border-collapse">
+                    <!-- Table Header -->
+                    <thead>
+                    <tr class="border-b-2">
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Number</th>
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Category name</th>
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Description</th>
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Created At</th>
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Last updated at</th>
+                        <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Product Row -->
+                    <tr th:each="cate, index : ${categories}" class="hover:bg-grey-lighter border-b-2 ">
+                        <td class="py-4 px-6" th:text="${index.index + 1}">1</td>
+                        <td class="py-4 px-6" th:text="${cate.name}">Cate name</td>
+                        <td class="py-4 px-6" th:text="${cate.description}">Description</td>
+                        <td class="py-4 px-6" th:text="${#temporals.format(cate.create_at, 'HH:mm:ss - dd/MM/yyyy')}">Description</td>
+                        <td class="py-4 px-6" th:text="${#temporals.format(cate.update_at, 'HH:mm:ss - dd/MM/yyyy')}">Description</td>
+                        <td class="py-4 px-6 gap-5 flex">
+                            <a th:href="@{'/admin/category-management/update/' + ${cate.id}}" class="text-blue-500 pr-4">Sửa</a>
+                            <a th:href="'/admin/category-management/delete/' + ${cate.id}" class="delete-link text-red-500" data-confirm="Are you sure you want to delete this item?">Delete</a>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <script>
+                $(document).ready(function() {
+                    $(".delete-link").on("click", function(e) {
+                        e.preventDefault();
+                        var link = $(this);
+                        var url = link.attr("href");
+                        var confirmMessage = link.data("confirm");
+                        if (confirm(confirmMessage)) {
+                            $.ajax({
+                                url: url,
+                                type: "DELETE",
+                                success: function(response) {
+                                    if (response) {
+                                        link.closest("tr").remove();
+                                        $("#delete-success-message").text(response).show();
+                                    } else {
+                                        alert("Error: " + response);
+                                        $("#delete-faild-message").text(response).show();
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    $("#delete-faild-message").text(error).show();
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+
+            <!-- Pagination -->
+            <div class="flex justify-between items-center">
+                <div class="text-grey-dark">
+                    Hiển thị 1 đến 10 của 100 sản phẩm
+                </div>
+                <div class="inline-flex">
+                    <button class="text-sm bg-grey-lighter hover:bg-grey rounded py-2 px-4">Trước</button>
+                    <button class="text-sm bg-blue-500 hover:bg-blue-700 text-white rounded py-2 px-4">Sau</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </body>
 </html>

@@ -1,15 +1,14 @@
 package ptit.tttn.phoneshop.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,6 +23,8 @@ public class Category {
     private LocalDateTime create_at;
     private LocalDateTime update_at;
 
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products = new ArrayList<>();
 
     public Category(String name, String description, LocalDateTime create_at, LocalDateTime update_at) {
         this.name = name;
@@ -35,7 +36,6 @@ public class Category {
     public Category() {
 
     }
-
     @Override
     public String toString() {
         return "Category{" +

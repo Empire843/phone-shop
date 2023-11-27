@@ -50,6 +50,9 @@ public class AwsS3Service {
         String fileUrl = "";
         try {
             for (MultipartFile file : files) {
+                if(file.isEmpty() || file == null) {
+                    continue;
+                }
                 ObjectMetadata metadata = new ObjectMetadata();
                 metadata.setContentLength(file.getSize());
 

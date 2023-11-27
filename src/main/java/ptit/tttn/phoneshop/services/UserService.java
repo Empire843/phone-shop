@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -34,6 +35,9 @@ public class UserService {
         if(checkEmailExist(request.getEmail())) {
             throw new RuntimeException("Email already exists");
         }
+        if(checkUsernameExist(request.getUsername())) {
+            throw new RuntimeException("Username already exists");
+        }
         User user  = User.builder()
                 .email(request.getEmail())
                 .username(request.getUsername())
@@ -45,6 +49,9 @@ public class UserService {
                 .updateAt(LocalDateTime.now())
                 .active(false).build();
         return repo.save(user);
+    }
+    private boolean checkUsernameExist(@NotNull String username) {
+        return repo.findByUsername(username).isPresent();
     }
     private boolean checkEmailExist(@NotNull String email) {
         return repo.findByEmail(email).isPresent();
@@ -82,11 +89,37 @@ public class UserService {
         return false;
     }
 //    forget password
-    public void sendResetPasswordEmail(@NotNull User user) {
-        String password = UUID.randomUUID().toString();
+    public void sendResetPasswordEmail(@NotNull String email, @NotNull String username) {
+        User user = repo.findByEmailAndUsername(email, username).orElseThrow(() ->
+                new RuntimeException("Email or username is not correct")
+        );
+        String password = UUID.randomUUID().toString().substring(0,8);
         user.setPassword(passwordEncoder.encode(password));
-        String message = "Mật khẩu mới của bạn là: " + password+"\n" +
-                "Vui lòng đăng nhập và đổi mật khẩu mới";
+        repo.save(user);
+        String message = "Mật khẩu mới của bạn là: "
+                + password
+                + "\n Vui lòng đăng nhập và đổi mật khẩu mới";
         mailSender.sendEmail(user.getEmail(),"Reset password account",message);
     }
+
+    public User getUserById(Long userId) {
+        return repo.findById(userId).orElseThrow(() ->
+                new RuntimeException("User not found")
+        );
+    }
+
+    public User getUserByUsername(String username) {
+        return (User) repo.findByUsername(username).orElseThrow(() ->
+                new RuntimeException("User not found")
+        );
+    }
+
+    public List<User> getAllUser() {
+        return repo.findAllByRole(Role.USER);
+    }
+
+    public void saveUser(User user) {
+        repo.save(user);
+    }
+
 }

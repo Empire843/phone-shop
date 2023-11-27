@@ -1,0 +1,174 @@
+<div th:fragment="_form_edit_product(product, categories)"
+     xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+    <form th:if="${product}" th:action="'/admin/product-management/update/' + ${product.id}" method="post"
+          class="max-w-7xl mx-auto w-full border border-black rounded-lg p-5 bg-white" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:value="${product.id}">
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="product-name">
+                Product Name
+            </label>
+            <input th:value="${product.name}" name="name" required
+                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   id="product-name" type="text" placeholder="Product Name">
+        </div>
+       <div class="flex flex-row gap-3">
+           <div class="mb-4">
+               <label class="block text-gray-700 text-sm font-bold mb-2" for="brand">
+                   Brand
+               </label>
+               <input th:value="${product.brand}" name="brand" required
+                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id="brand" type="text" placeholder="Brand">
+           </div>
+
+           <div class="mb-4">
+               <label class="block text-gray-700 text-sm font-bold mb-2" for="operatingSystem">
+                   Operating System
+               </label>
+               <input id="operatingSystem" th:value="${product.operatingSystem}" name="operatingSystem" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Brand">
+           </div>
+           <div class="mb-4">
+               <label class="block text-gray-700 text-sm font-bold mb-2" for="cpu">
+                   CPU
+               </label>
+               <input id="cpu" th:value="${product.cpu}" name="cpu" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Brand">
+           </div>
+       </div>
+       <div class="flex flex-row gap-3">
+           <div class="mb-4">
+               <label class="block text-gray-700 text-sm font-bold mb-2" for="ram">
+                   Ram
+               </label>
+               <input id="ram" name="ram" th:value="${product.ram}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Brand">
+           </div>
+           <div class="mb-4">
+               <label class="block text-gray-700 text-sm font-bold mb-2" for="rom">
+                   rom
+               </label>
+               <input id="rom" name="rom" th:value="${product.rom}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Brand">
+           </div>
+           <div class="mb-4">
+               <label class="block text-gray-700 text-sm font-bold mb-2" for="screenSizes">
+                   Screen Sizes
+               </label>
+               <input id="screenSizes" th:value="${product.screenSizes}" name="screenSizes" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Brand">
+           </div>
+
+           <div class="mb-4">
+               <label class="block text-gray-700 text-sm font-bold mb-2" for="batteryCapacity">
+                   Battery Capacity
+               </label>
+               <input id="batteryCapacity" th:value="${product.batteryCapacity}" name="batteryCapacity" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Brand">
+           </div>
+       </div>
+
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+                Description
+            </label>
+            <textarea th:field="${product.description}" name="description"
+                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      id="description" placeholder="Description"></textarea>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="category">
+                Category
+            </label>
+            <select name="categoryId"
+                    class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                    id="category">
+                <option th:selected="${cate.id == product.category.id}" th:each="cate : ${categories}"
+                        th:text="${cate.name}" th:value="${cate.id}"></option>
+            </select>
+        </div>
+        <div>
+            <div class="mb-4" id="colors-edit">
+                <input id="colorListSize" type="hidden" th:value="${product.colors.size()}">
+                <label class="block text-gray-700 text-sm font-bold mb-2">
+                    Màu Sắc
+                </label>
+                <div th:each="color, iterStat : ${product.colors}" class="flex mb-2"
+                     th:id="'color-input-' + ${iterStat.index}">
+                    <input th:value="${color.colorName}" th:name="'colors[' + ${iterStat.index}  +']'" required
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                           type="text" placeholder="Tên màu sắc">
+                    <button type="button"
+                            class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            onclick="removeThisColorFieldEdit(this)">
+                        Remove
+                    </button>
+                </div>
+            </div>
+            <div class="mb-4">
+                <button type="button" id="add-color-edit"
+                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Add new Color
+                </button>
+            </div>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="brand">
+                Price(VND)
+            </label>
+            <input th:value="${product.price}" name="price" required
+                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   id="price" type="text" placeholder="Price">
+        </div>
+        <div class="mb-4">
+            <th:block th:with="countImage=0"></th:block>
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="image-upload">
+                Product Image
+            </label>
+            <input id="image-upload" type="file" name="files" multiple="multiple"/>
+
+            <div class=" w-fit flex flex-col gap-2">
+                <div id="image-preview-container" class="flex gap-2 max-w-full flex-wrap"></div>
+                <div class="flex flex-row">
+                    <div th:each="image, iterStat : ${product.images}"
+                         class="" th:id="'image-view-' + ${image.id}">
+                        <div class="flex h-full w-fit border rounded-lg bg-gray-200" th:id="${image.id}" onclick="btnDeleteImageView(this.id)">
+                            <div class="absolute z-1000  w-8 h-8  translate-x-40 cursor-pointer hover:bg-gray-500 flex items-center justify-center">
+                                <svg  id="delete-image" class="w-full h-full" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512">
+                                    <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+                                </svg>
+                            </div>
+                            <img  th:src="${image.urlImage}" class="w-full h-full max-w-[200px] max-h-[200px] block object-scale-down">
+                            <input type="hidden" th:name="'images[' + ${iterStat.count} + ']'" th:value="${image.id}">
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+        <script>
+            function btnDeleteImageView(id){
+                const imageViewContainer = document.getElementById('image-view-' + id);
+                imageViewContainer.remove()
+            }
+        </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                let colorCount = document.getElementById('colorListSize').value;
+                const addColorButton = document.getElementById('add-color-edit');
+                addColorButton.addEventListener('click', () => {
+                    var newColorInput = document.createElement('div');
+                    var colorsDiv = document.getElementById('colors-edit');
+                    colorCount++;
+                    newColorInput.classList.add('flex', 'mb-2');
+                    newColorInput.innerHTML =`
+            <input name="colors[${colorCount}]" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Color name">
+            <button type="button" class="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+           onclick="removeThisColorFieldEdit(this)"> Remove</button>`;
+                    colorsDiv.appendChild(newColorInput);
+                });
+            });
+            function removeThisColorFieldEdit(button) {
+                button.parentNode.remove();
+            }
+        </script>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit">
+            Update Product
+        </button>
+    </form>
+</div>

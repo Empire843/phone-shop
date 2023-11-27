@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:x-on="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
     <link rel="stylesheet" th:href="@{/css/main.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <title>Document</title>
     <style>
         .slider {
@@ -24,212 +26,117 @@
 </head>
 
 <body class="w-full h-full">
-<nav
-        class="relative bg-white dark:bg-gray-900  w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="/src/index.html" class="flex items-center object-cover">
-            <img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                 class="w-full h-16 mr-3 object-cover" alt="Flowbite Logo">
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Shopping</span>
-        </a>
-        <div class="flex md:order-2 items-center">
-            <div class="relative  text-left flex items-center gap-3">
-                <div>
-                    <button class="border-2 border-gray-300 border-separate rounded-full">
-                        <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown"
-                             data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer"
-                             src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                             alt="User dropdown">
-                    </button>
-                    <!-- Dropdown menu -->
-                    <div id="userDropdown"
-                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                            <div>Bonnie Green</div>
-                            <div class="font-medium truncate">name@flowbite.com</div>
-                        </div>
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
-                            <li>
-                                <a href="#"
-                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                            </li>
-                        </ul>
-                        <div class="py-1">
-                            <a href="#"
-                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
-                                out</a>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <button class="w-7"><a href="/src/cart.html"><img class="w-full" src="/images/cart_icon.svg"
-                                                                  alt=""></a></button>
-                <!-- <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-                    <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
-                            aria-hidden="true">&rarr;</span></a>
-                </div> -->
-            </div>
-        </div>
-        <div class="items-center justify-between hidden] md:flex md:w-auto md:order-1" id="navbar-sticky">
-
-            <form class="w-[500px] flex items-center">
-                <label for="simple-search" class="sr-only">Search</label>
-                <div class="relative w-full">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
-                        </svg>
-                    </div>
-                    <input type="text" id="simple-search"
-                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                           placeholder="Search branch name..." required>
-                </div>
-                <button type="submit"
-                        class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                         viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+<div th:replace="~{layout/header :: header(fullname, email)}"></div>
+<div id="crud-modal" tabindex="-1" aria-hidden="true"
+     class="hidden bg-opacity-50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 w-[500px]">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    Create Address
+                </h3>
+                <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-toggle="crud-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                         fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                              stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                     </svg>
-                    <span class="sr-only">Search</span>
+                    <span class="sr-only">Close modal</span>
                 </button>
+            </div>
+            <form class="p-4 md:p-5" method="post" action="/product/add-review" id="reviewForm">
+                <div class="grid gap-4 mb-4">
+                    <!-- Rating input -->
+                    <div>
+                        <label for="rating" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rating</label>
+                        <input type="range" name="rate" id="rating" min="1" max="5" step="1" oninput="output.value = this.value" required>
+                        <output id="ratingOutput">3</output> Star <!-- Giá trị mặc định được hiển thị -->
+                    </div>
+                    <!-- Review input -->
+                    <div class="col-span-2">
+                        <label for="review" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Review</label>
+                        <textarea name="comment" id="review" rows="4" class="w-full" placeholder="Write your review here..." required></textarea>
+                    </div>
+                    <input name="productId" type="hidden" th:value="${product.getId()}">
+                </div>
+                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit Review</button>
             </form>
+            <script>
+                // Update the output value
+                var ratingInput = document.getElementById('rating');
+                var output = document.getElementById('ratingOutput');
+                output.value = ratingInput.value; // Display the default slider value
 
+                // Update the current slider value (each time you drag the slider handle)
+                ratingInput.oninput = function() {
+                    output.value = this.value;
+                }
+            </script>
 
-            <!-- <ul
-                class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                <li>
-                    <a href="#"
-                        class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                        aria-current="page">Home</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-                </li>
-            </ul> -->
         </div>
     </div>
-</nav>
-
+</div>
 <main class="container m-auto justify-center gap-x-4 my-16">
     <div class="w-4/5 m-auto">
         <div class="w-full">
-            <p class="font-bold text-2xl">IPhone 15 Plus 128GB | Chính hãng VN/A</p>
+            <p class="font-bold text-2xl" th:text="${product.name}">IPhone 15 Plus 128GB | Chính hãng VN/A</p>
             <hr class="border-gray-500 mt-3">
         </div>
         <div class="mt-4 flex gap-5 ">
             <div class="w-1/2">
-                <div class="border-2  rounded-xl border-primary-red p-5">
+                <div class="border-2  rounded-xl shadow-lg p-5">
                     <div class="slider relative">
-                        <div id="slide-container" class=" flex">
-                            <div class="slide">
-                                <img src="https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/7/19/638253719457391276_oppo-reno10-5g-xanh-5.jpg"
+                        <div id="slide-container" class=" flex items-center justify-center">
+                            <div class="flex items-center  justify-center slide" th:each="image : ${product.images}">
+                                <img th:src="${image.urlImage}"
                                      alt="Slide 1">
-                            </div>
-                            <div class="slide">
-                                <img src="https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/7/12/638247789994964040_oppo-reno10-5g-xanh-4.jpg"
-                                     alt="Slide 2">
-                            </div>
-                            <div class="slide">
-                                <img src="https://images.fpt.shop/unsafe/fit-in/585x390/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2023/7/19/638253719455790122_oppo-reno10-5g-xanh-3.jpg"
-                                     alt="Slide 3">
                             </div>
                         </div>
                         <button id="prevBtn"
                                 class="absolute left-0 top-1/2 transform -translate-y-1/2  text-white px-4 py-2 rounded-l">
-                            <img class="w-8" src="/images/prev_icon.svg" alt="">
+                            <img class="w-6" src="/images/prev_icon.svg" alt="">
                         </button>
                         <button id="nextBtn"
                                 class="absolute right-0 top-1/2 transform -translate-y-1/2  text-white px-4 py-2 rounded-r">
-                            <img class="w-8" src="/images/next_icon.svg" alt="">
+                            <img class="w-6" src="/images/next_icon.svg" alt="">
                         </button>
                     </div>
                 </div>
             </div>
             <div class="w-1/2  rounded-xl px-4">
                 <div class="flex gap-5 items-center">
-                    <p class="text-3xl text-primary-red font-bold">11.990.000₫</p>
-                    <p class="text-lg text-gray-500 font-bold line-through">21.990.000₫</p>
+                    <p class="text-3xl text-primary-red font-bold" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} +'₫'">11,990,000₫</p>
+                    <p class="text-lg text-gray-500 font-bold line-through" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')} +'₫'">21,990,000₫</p>
                 </div>
                 <div class="flex gap-10 mt-6">
-                    <div class="border border-gray-400 px-8 py-1">
-                        <div class="col-span-1">
-                            <input class="col-span-1 " id="256gb" type="radio" name="rom-capacity">
-                            <label class="col-span-1" for="256gb">256GB</label>
-                        </div>
-                        <p class="col-span-2">11.990.000₫</p>
-                    </div>
-                    <div class="border border-gray-400 px-8 py-1">
-                        <div>
-                            <input class="col-span-1 " id="128gb" type="radio" name="rom-capacity">
-                            <label class="col-span-1" for="128gb">128GB</label>
-                        </div>
-                        <p class="col-span-2">10.990.000₫</p>
-                    </div>
+<!--                    <div class="border border-gray-400 px-8 py-1">-->
+<!--                        <div class="col-span-1">-->
+<!--                            <input class="col-span-1 " id="256gb" type="radio" name="rom-capacity">-->
+<!--                            <label class="col-span-1" for="256gb">256GB</label>-->
+<!--                        </div>-->
+<!--                        <p class="col-span-2">11.990.000₫</p>-->
+<!--                    </div>-->
+<!--                    <div class="border border-gray-400 px-8 py-1">-->
+<!--                        <div>-->
+<!--                            <input class="col-span-1 " id="128gb" type="radio" name="rom-capacity">-->
+<!--                            <label class="col-span-1" for="128gb">128GB</label>-->
+<!--                        </div>-->
+<!--                        <p class="col-span-2">10.990.000₫</p>-->
+<!--                    </div>-->
                 </div>
                 <div class="mt-4">
                     <p>Select the color</p>
-                    <ul class="flex flex-wrap gap-4 text-sm ">
-                        <li>
-                            <label class="inline-flex items-center">
-                                <input type="radio" class="form-radio h-7 w-12 text-red-500 rounded bg-red-500"
-                                       name="color" />
-                                <span class="ml-2">Red</span>
+                    <div class="w-1/2 gap-16 text-sm grid grid-cols-3">
+                        <div th:each="color : ${product.colors}">
+                            <label class="flex items-center">
+                                <input type="radio" class="form-radio h-7 w-12"
+                                       name="colorName" th:value="${color.colorName}" />
+                                <span class="ml-2" th:text="${color.colorName}">Red</span>
                             </label>
-                        </li>
-                        <li>
-                            <label class="inline-flex items-center">
-                                <input type="radio" class="form-radio h-7 w-12 text-blue-500 rounded bg-blue-500"
-                                       name="color" />
-                                <span class="ml-2">Blue</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="inline-flex items-center">
-                                <input type="radio" class="form-radio h-7 w-12 text-green-500 rounded bg-green-500"
-                                       name="color" />
-                                <span class="ml-2">Green</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="inline-flex items-center">
-                                <input type="radio"
-                                       class="form-radio h-7 w-12 text-yellow-500 rounded bg-yellow-500"
-                                       name="color" />
-                                <span class="ml-2">Yellow</span>
-                            </label>
-                        </li>
-                        <li>
-                            <label class="inline-flex items-center">
-                                <input type="radio"
-                                       class="form-radio h-7 w-12 text-orange-500 rounded bg-orange-500"
-                                       name="color" />
-                                <span class="ml-2">Orange</span>
-                            </label>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mt-5 bg-gray-100 p-2 rounded-lg">
@@ -254,183 +161,211 @@
                 </div>
                 <div class="grid grid-cols-2 gap-x-5 gap-y-5 mt-5">
                     <button class="col-span-2 border h-16 rounded-md bg-primary-red text-white">Mua ngay</button>
-                    <button
+                    <button id="btnAddToCart"
                             class="col-span-1 border border-primary-red text-primary-red h-16 rounded-md flex items-center gap-2 justify-center">
                         <img src="/images/cart_red_icon.svg" alt="">
                         <p>Thêm vào giỏ hàng</p>
                     </button>
-                    <button class="col-span-1 border h-16 rounded-md bg-primary-dark-blue text-white">Tìm hiểu
-                        thêm</button>
+                    <button class="bg-primary-red col-span-1 border h-16 rounded-md bg-primary-dark-blue text-white">Tìm hiểu thêm</button>
                 </div>
-                <div class="w-full border border-primary-red px-3 rounded-lg mt-3">
+                <input type="hidden" id="userId" th:value="${userId}" />
+                <input type="hidden" id="productId" th:value="${product.getId()}"/>
+                <input type="hidden" id="quantity" />
+                <div class="w-full border border-primary-red px-3 rounded-lg mt-6">
                     <div class="px-3 ">
-                        <p class="border-primary-red">Thông số kỹ thuật</p>
+                        <p class="border-primary-red mb-2">Thông số kỹ thuật</p>
                         <hr class="border-primary-red">
-                        <div>
+                        <div class="font-semibold gap-y-10">
+                            <div class="mb-2">
+                                <p class="inline text-gray-600">Hãng: </p>
+                                <p th:text="${product.category.name} " class="inline"> </p>
+                            </div>
+                            <div class="mb-2">
+                                <p class="inline text-gray-600">Hệ điều hành: </p>
+                                <p th:text="${product.operatingSystem} " class="inline"> </p>
+                            </div>
+                            <div class="mb-2">
+                                <p class="inline text-gray-600">Chip xử lý: </p>
+                                <p th:text="${product.cpu}" class="inline"> </p>
+                            </div>
+                            <div class="mb-2">
+                                <p class="inline text-gray-600">RAM: </p>
+                                <p th:text="${product.ram} + 'GB'" class="inline"> </p>
+                            </div>
+                            <div class="mb-2">
+                                <p class="inline text-gray-600">Dung lượng bộ nhớ: </p>
+                                <p th:text="${product.rom} + 'GB'" class="inline"> </p>
+                            </div>
+                            <div class="mb-2">
+                                <p class="inline text-gray-600">Kích thước màn hình </p>
+                                <p th:text="${product.screenSizes} + ' inch'" class="inline"> </p>
+                            </div>
+                            <div class="mb-2">
+                                <p class="inline text-gray-600">Dung lượng Pin: </p>
+                                <p th:text="${product.batteryCapacity} + ' mAh'" class="inline"> </p>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="w-full h-full mt-10 border rounded-xl">
-            sd
-        </div>
+
     </div>
     <div class="w-full px-4 border rounded-lg bg-gray-100 my-10">
-        <p class="text-2xl my-5">Đánh giá sản phẩm</p>
-        <form action="">
-            <div>
-                <div class="flex items-center space-x-1">
-                    <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                         fill="currentColor" viewBox="0 0 22 20">
-                        <path
-                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                    </svg>
-                    <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                         fill="currentColor" viewBox="0 0 22 20">
-                        <path
-                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                    </svg>
-                    <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                         fill="currentColor" viewBox="0 0 22 20">
-                        <path
-                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                    </svg>
-                    <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                         fill="currentColor" viewBox="0 0 22 20">
-                        <path
-                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                    </svg>
-                    <svg class="w-6 h-6 text-gray-300 dark:text-gray-500" aria-hidden="true"
-                         xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                        <path
-                                d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                    </svg>
+        <div x-data="{ openTab: 1 }" class="p-8">
+            <div class="w-full mx-auto">
+                <div class="mb-4 flex space-x-4 p-2 bg-white rounded-lg shadow-md">
+                    <button x-on:click="openTab = 1" :class="{ 'bg-blue-600 text-white': openTab === 1 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300">Mô tả sản phẩm</button>
+                    <button x-on:click="openTab = 2" :class="{ 'bg-blue-600 text-white': openTab === 2 }" class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300">Đánh giá sản phẩm</button>
+                    <button data-modal-target="crud-modal" data-modal-toggle="crud-modal"
+                            class="flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300"
+                            type="button">
+                        Gửi đánh giá sản phẩm
+                    </button>
                 </div>
-                <textarea class="rounded-lg w-full mt-3" name="" id="" cols="30" rows="10"></textarea>
-                <button class="border rounded-md px-3 my-2 py-2  bg-primary-red text-white">Đánh giá</button>
-            </div>
-        </form>
-
-        <hr>
-        <div class="mt-10">
-            <div class="flex gap-5 my-6">
-                <img class="w-12 h-12 rounded-full border-2 p-1" src="/images/icon_user.svg" alt="">
-                <div>
-                    <p class="font-bold text-xl">Trần Nhật Quang</p>
-
-                    <div class="flex items-center my-2">
-                        <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-gray-300 mr-1 dark:text-gray-500" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                    </div>
-
-                    <p class="text-lg">Máy mượt, thiết kế đẹp. Nhưng cầm nắm trơn, đa nhiệm nóng nhiều</p>
-                    <p class="text-sm text-gray-500">Ngày 27/08/2023</p>
+                <div x-show="openTab === 1" class="transition-all duration-300 bg-white p-4 rounded-lg shadow-md border-l-4 border-blue-600">
+                    <p class="whitespace-pre-line" th:text="${product.description}"></p>
                 </div>
-            </div>
-            <div class="flex gap-5 my-6">
-                <img class="w-12 h-12 rounded-full border-2 p-1" src="/images/icon_user.svg" alt="">
-                <div>
-                    <p class="font-bold text-xl">Trần Nhật Quang</p>
-
-                    <div class="flex items-center my-2">
-                        <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-gray-300 mr-1 dark:text-gray-500" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
+                <div x-show="openTab === 2" class="transition-all duration-300 bg-white p-4 rounded-lg shadow-md border-l-4 border-blue-600">
+                    <div class="mt-10" >
+                        <div class="flex gap-5 my-6" th:each="review, index : ${reviews}">
+                            <img class="w-12 h-12 rounded-full border-2 p-1" src="/images/icon_user.svg" alt="">
+                            <div>
+                                <p class="font-bold text-xl" th:text="${review.getUser().getLastName()}  + ' ' + ${review.getUser().getFirstName()}">Trần Nhật Quang</p>
+                                <div class="flex items-center gap-2 font-bold text-sl">
+                                    <p class="inline-block" th:text="${review.getRate()} + ' '"></p>
+                                    <div class="flex items-center my-2">
+                                        <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
+                                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                            <path
+                                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p class="text-lg" th:text="${review.getComment()}">Máy mượt, thiết kế đẹp. Nhưng cầm nắm trơn, đa nhiệm nóng nhiều</p>
+                                <p class="text-sm text-gray-500" th:text="${review.getCreate_at()}">Ngày 27/08/2023</p>
+                            </div>
+                        </div>
                     </div>
-
-                    <p class="text-lg">Máy mượt, thiết kế đẹp. Nhưng cầm nắm trơn, đa nhiệm nóng nhiều</p>
-                    <p class="text-sm text-gray-500">Ngày 27/08/2023</p>
                 </div>
-            </div>
-            <div class="flex gap-5 my-6">
-                <img class="w-12 h-12 rounded-full border-2 p-1" src="/images/icon_user.svg" alt="">
-                <div>
-                    <p class="font-bold text-xl">Trần Nhật Quang</p>
-
-                    <div class="flex items-center my-2">
-                        <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg class="w-4 h-4 text-gray-300 mr-1 dark:text-gray-500" aria-hidden="true"
-                             xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                            <path
-                                    d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                    </div>
-
-                    <p class="text-lg">Máy mượt, thiết kế đẹp. Nhưng cầm nắm trơn, đa nhiệm nóng nhiều</p>
-                    <p class="text-sm text-gray-500">Ngày 27/08/2023</p>
+                <div x-show="openTab === 3" class="transition-all duration-300 bg-white p-4 rounded-lg shadow-md border-l-4 border-blue-600">
+                    <p class="text-2xl my-5">Đánh giá sản phẩm</p>
+                    <form action="">
+                        <div>
+                            <div class="flex items-center space-x-1">
+                                <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                     fill="currentColor" viewBox="0 0 22 20">
+                                    <path
+                                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                </svg>
+                                <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                     fill="currentColor" viewBox="0 0 22 20">
+                                    <path
+                                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                </svg>
+                                <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                     fill="currentColor" viewBox="0 0 22 20">
+                                    <path
+                                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                </svg>
+                                <svg class="w-6 h-6 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                     fill="currentColor" viewBox="0 0 22 20">
+                                    <path
+                                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                </svg>
+                                <svg class="w-6 h-6 text-gray-300 dark:text-gray-500" aria-hidden="true"
+                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                    <path
+                                            d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                </svg>
+                            </div>
+                            <textarea class="rounded-lg w-full mt-3" name="" id="" cols="30" rows="10"></textarea>
+                            <button class="border rounded-md px-3 my-2 py-2  bg-primary-red text-white">Đánh giá</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="messageContainer" class="border border-l-8 border-black z-40 fixed text-white font-semibold top-5 right-0 transform ease-in-out duration-300 translate-x-full  bg-green-200  p-4 rounded-md shadow-lg max-w-xs">
+                    Đây là thông báo!
                 </div>
             </div>
         </div>
+        <hr>
     </div>
 </main>
 <footer class=""></footer>
-<script src="/javascripts/slide.js"></script>
+<script>
+    function addProductToCart() {
+        if($('#userId').val() == null || $('#userId').val() == 0){
+            alert("Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng");
+            window.location.href = "/login";
+            return;
+        }
+        var data = {
+            userId: $('#userId').val(),
+            productId: $('#productId').val(),
+            // quantity: parseInt($('#quantity').val(), 10)
+            colorName: $('input[name="colorName"]:checked').val(),
+            quantity: 1
+        };
+        $.ajax({
+            url: '/api/cart/add-item',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            success: function(response) {
+                // Handle success
+                console.log("Response: ", response);
+                // alert("Product added to cart successfully");
+                slideMessage("Success", "Product added to cart successfully");
+            },
+            error: function(xhr, status, error) {
+                // Handle error
+                console.error("Error: ", error);
+                alert("Error: " + error);
+            }
+        });
+    }
+    $('#btnAddToCart').on('click', function() {
+        addProductToCart();
+    });
+    function slideMessage(title,messageText) {
+        var messageDiv = document.getElementById('messageContainer');
+        messageDiv.innerHTML = '<h2 class="text-xl font-semibold mb-2 text-blue-600">'+title+'</h2><p class="text-gray-700">'+messageText+'</p>';
+        // Di chuyển thông báo vào vị trí
+        messageDiv.style.transform = 'translateX(-50%)';
+
+        // Chờ 5 giây rồi di chuyển thông báo ra khỏi vị trí và ẩn nó
+        setTimeout(function() {
+            messageDiv.style.transform = 'translateX(100%)';
+        }, 2500);
+    }
+    // Call this function to show and animate the message dialog
+</script>
+
+
+<script>
+    const slideContainer = document.querySelector('#slide-container');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let counter = 0;
+    const size = slideContainer.children[0].clientWidth;
+
+    nextBtn.addEventListener('click', () => {
+        if (counter >= slideContainer.children.length - 1) return;
+        counter++;
+        slideContainer.style.transform = 'translateX(' + (-size * counter) + 'px)';
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (counter <= 0) return;
+        counter--;
+        slideContainer.style.transform = 'translateX(' + (-size * counter) + 'px)';
+    });
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 </body>
 
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tailwind Admin Template</title>
+    <title>Dashboard</title>
     <meta name="author" content="David Grzyb">
     <meta name="description" content="">
 
@@ -22,7 +22,6 @@
     </style>
 </head>
 <body class="bg-gray-100 font-family-karla flex">
-
 <div th:replace="~{admin/common/sidebar :: sidebar}"></div>
 <div class="w-full flex flex-col h-screen overflow-y-hidden">
     <!-- Desktop Header -->
@@ -129,63 +128,130 @@
                     <table class="min-w-full bg-white">
                         <thead class="bg-gray-800 text-white">
                         <tr>
-                            <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Name</th>
-                            <th class="w-1/3 text-left py-3 px-4 uppercase font-semibold text-sm">Last name</th>
-                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Phone</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Index</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">avatar</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Full name</th>
                             <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Email</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Username</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Phone Number</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Status</th>
+                            <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Action</th>
                         </tr>
                         </thead>
                         <tbody class="text-gray-700">
-                        <tr>
-                            <td class="w-1/3 text-left py-3 px-4">Lian</td>
-                            <td class="w-1/3 text-left py-3 px-4">Smith</td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                        </tr>
-                        <tr class="bg-gray-200">
-                            <td class="w-1/3 text-left py-3 px-4">Emma</td>
-                            <td class="w-1/3 text-left py-3 px-4">Johnson</td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                        </tr>
-                        <tr>
-                            <td class="w-1/3 text-left py-3 px-4">Oliver</td>
-                            <td class="w-1/3 text-left py-3 px-4">Williams</td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                        </tr>
-                        <tr class="bg-gray-200">
-                            <td class="w-1/3 text-left py-3 px-4">Isabella</td>
-                            <td class="w-1/3 text-left py-3 px-4">Brown</td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                        </tr>
-                        <tr>
-                            <td class="w-1/3 text-left py-3 px-4">Lian</td>
-                            <td class="w-1/3 text-left py-3 px-4">Smith</td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                        </tr>
-                        <tr class="bg-gray-200">
-                            <td class="w-1/3 text-left py-3 px-4">Emma</td>
-                            <td class="w-1/3 text-left py-3 px-4">Johnson</td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                        </tr>
-                        <tr>
-                            <td class="w-1/3 text-left py-3 px-4">Oliver</td>
-                            <td class="w-1/3 text-left py-3 px-4">Williams</td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                        </tr>
-                        <tr class="bg-gray-200">
-                            <td class="w-1/3 text-left py-3 px-4">Isabella</td>
-                            <td class="w-1/3 text-left py-3 px-4">Brown</td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">622322662</a></td>
-                            <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">jonsmith@mail.com</a></td>
-                        </tr>
+                            <tr th:each="user, index :${users}">
+                                <td class="text-left py-3 px-4 uppercase font-semibold text-sm" th:text="${index.index + 1}"></td>
+                                <td class="text-left py-3 px-4 uppercase font-semibold text-sm">
+                                    <img class="rounded-full w-6 h-6" th:if="${user.getAvatar() != null}" th:src="${user.getAvatar()}">
+                                    <svg class="rounded-full w-6 h-6" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+                                </td>
+                                <td class="text-left py-3 px-4 uppercase font-semibold text-sm" th:text="${user.getLastName()} + ' ' + ${user.getFirstName()}">Full name</td>
+                                <td class="text-left py-3 px-4 uppercase font-semibold text-sm" th:text="${user.getEmail()}">Email</td>
+                                <td class="text-left py-3 px-4 uppercase font-semibold text-sm" th:text="${user.getUsername()}">Username</td>
+                                <td class="text-left py-3 px-4 uppercase font-semibold text-sm" th:text="${user.getPhone()}">Phone Number</td>
+                                <td class="text-left py-3 px-4 uppercase font-semibold text-sm" th:text="${user.isActive()} ? 'Active' : 'Block'">Status</td>
+                                <td class="text-left py-3 px-4 uppercase font-semibold text-sm flex gap-2">
+                                    <form action="/admin/user/update-status" method="post">
+                                        <input type="hidden" name="id" th:value="${user.getId()}">
+                                        <input type="hidden" th:value="${user.isActive()}" name="status">
+                                        <button type="submit" class=" text-center block hover:bg-red-800 hover:text-white text-blue-400  underline border rounded-lg px-3 py-2" th:text="${user.isActive()} ? 'Block ' : 'Active'"></button>
+                                    </form>
+                                    <a href="#" class=" text-center block hover:bg-blue-500 hover:text-white text-blue-400  underline border rounded-lg px-3 py-2">View</a>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
+<!--                    <ul role="list" class="divide-y divide-gray-100 mx-4">-->
+<!--                        <li class="flex justify-between gap-x-6 py-5">-->
+<!--                            <div class="flex min-w-0 gap-x-4">-->
+<!--                                <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">-->
+<!--                                <div class="min-w-0 flex-auto">-->
+<!--                                    <p class="text-sm font-semibold leading-6 text-gray-900">Leslie Alexander</p>-->
+<!--                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">leslie.alexander@example.com</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">-->
+<!--                                <p class="text-sm leading-6 text-gray-900">Co-Founder / CEO</p>-->
+<!--                                <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z">3h ago</time></p>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                        <li class="flex justify-between gap-x-6 py-5">-->
+<!--                            <div class="flex min-w-0 gap-x-4">-->
+<!--                                <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">-->
+<!--                                <div class="min-w-0 flex-auto">-->
+<!--                                    <p class="text-sm font-semibold leading-6 text-gray-900">Michael Foster</p>-->
+<!--                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">michael.foster@example.com</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">-->
+<!--                                <p class="text-sm leading-6 text-gray-900">Co-Founder / CTO</p>-->
+<!--                                <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z">3h ago</time></p>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                        <li class="flex justify-between gap-x-6 py-5">-->
+<!--                            <div class="flex min-w-0 gap-x-4">-->
+<!--                                <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">-->
+<!--                                <div class="min-w-0 flex-auto">-->
+<!--                                    <p class="text-sm font-semibold leading-6 text-gray-900">Dries Vincent</p>-->
+<!--                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">dries.vincent@example.com</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">-->
+<!--                                <p class="text-sm leading-6 text-gray-900">Business Relations</p>-->
+<!--                                <div class="mt-1 flex items-center gap-x-1.5">-->
+<!--                                    <div class="flex-none rounded-full bg-emerald-500/20 p-1">-->
+<!--                                        <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>-->
+<!--                                    </div>-->
+<!--                                    <p class="text-xs leading-5 text-gray-500">Online</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                        <li class="flex justify-between gap-x-6 py-5">-->
+<!--                            <div class="flex min-w-0 gap-x-4">-->
+<!--                                <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">-->
+<!--                                <div class="min-w-0 flex-auto">-->
+<!--                                    <p class="text-sm font-semibold leading-6 text-gray-900">Lindsay Walton</p>-->
+<!--                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">lindsay.walton@example.com</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">-->
+<!--                                <p class="text-sm leading-6 text-gray-900">Front-end Developer</p>-->
+<!--                                <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z">3h ago</time></p>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                        <li class="flex justify-between gap-x-6 py-5">-->
+<!--                            <div class="flex min-w-0 gap-x-4">-->
+<!--                                <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">-->
+<!--                                <div class="min-w-0 flex-auto">-->
+<!--                                    <p class="text-sm font-semibold leading-6 text-gray-900">Courtney Henry</p>-->
+<!--                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">courtney.henry@example.com</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">-->
+<!--                                <p class="text-sm leading-6 text-gray-900">Designer</p>-->
+<!--                                <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time datetime="2023-01-23T13:23Z">3h ago</time></p>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                        <li class="flex justify-between gap-x-6 py-5">-->
+<!--                            <div class="flex min-w-0 gap-x-4">-->
+<!--                                <img class="h-12 w-12 flex-none rounded-full bg-gray-50" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">-->
+<!--                                <div class="min-w-0 flex-auto">-->
+<!--                                    <p class="text-sm font-semibold leading-6 text-gray-900">Tom Cook</p>-->
+<!--                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">tom.cook@example.com</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">-->
+<!--                                <p class="text-sm leading-6 text-gray-900">Director of Product</p>-->
+<!--                                <div class="mt-1 flex items-center gap-x-1.5">-->
+<!--                                    <div class="flex-none rounded-full bg-emerald-500/20 p-1">-->
+<!--                                        <div class="h-1.5 w-1.5 rounded-full bg-emerald-500"></div>-->
+<!--                                    </div>-->
+<!--                                    <p class="text-xs leading-5 text-gray-500">Online</p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+
                 </div>
             </div>
         </main>

@@ -5,8 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDateTime;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "order_items")
@@ -19,8 +19,8 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int quantity;
-    private double price;
-    private double total;
+    private String colorName;
+    private double priceAtPurchase;
     private LocalDateTime create_at;
     private LocalDateTime update_at;
 
@@ -29,11 +29,11 @@ public class OrderItem {
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "id")
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
-    public double getTotal() {
-        return this.quantity * this.price;
+    public double getTotalPrice() {
+        return this.quantity * this.priceAtPurchase;
     }
 
     @Override
@@ -41,8 +41,8 @@ public class OrderItem {
         return "OrderItem{" +
                 "id=" + id +
                 ", quantity=" + quantity +
-                ", price=" + price +
-                ", total=" + total +
+                ", colorName=" + colorName +
+                ", price=" + priceAtPurchase +
                 ", create_at=" + create_at +
                 ", update_at=" + update_at +
                 '}';

@@ -9,78 +9,7 @@
 </head>
 
 <body class="w-full h-full">
-<nav
-        class="relative bg-white dark:bg-gray-900  w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="https://flowbite.com/" class="flex items-center">
-            <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Flowbite Logo">
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
-        </a>
-        <div class="flex md:order-2 items-center">
-            <div class="relative  text-left flex items-center gap-3">
-                <div>
-                    <button class="border-2 border-gray-300 border-separate rounded-full">
-                        <img id="avatarButton" type="button" data-dropdown-toggle="userDropdown"
-                             data-dropdown-placement="bottom-start" class="w-10 h-10 rounded-full cursor-pointer"
-                             src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                             alt="User dropdown">
-                    </button>
-                    <!-- Dropdown menu -->
-                    <div id="userDropdown"
-                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-                            <div>Bonnie Green</div>
-                            <div class="font-medium truncate">name@flowbite.com</div>
-                        </div>
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
-                            <li>
-                                <a href="#"
-                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                            </li>
-                            <li>
-                                <a href="#"
-                                   class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-                            </li>
-                        </ul>
-                        <div class="py-1">
-                            <a href="#"
-                               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
-                                out</a>
-                        </div>
-                    </div>
-                </div>
-                <button class="w-7"><a href="/src/cart.html"><img class="w-full" src="/images/cart_icon.svg"
-                                                                  alt=""></a></button>
-            </div>
-        </div>
-        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-            <ul
-                    class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                <li>
-                    <a href="#"
-                       class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                       aria-current="page">Home</a>
-                </li>
-                <li>
-                    <a href="#"
-                       class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
-                </li>
-                <li>
-                    <a href="#"
-                       class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
-                </li>
-                <li>
-                    <a href="#"
-                       class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div th:replace="~{layout/header :: header(fullname, email)}"></div>
 <main class="container m-auto flex justify-center gap-x-4">
     <div class="w-1/6 h-96 mt-16">
         <div class=" grid grid-cols-2 gap-y-2 my-10">
@@ -105,24 +34,12 @@
                 <input class="rounded-md" type="checkbox" name="realme" id="realme">
                 <label for="realme">Realme</label>
             </div>
-            <div>
-                <input class="rounded-md" type="checkbox" name="samsung" id="samsung">
-                <label for="samsung">Samsung</label>
-            </div>
-            <div>
-                <input class="rounded-md" type="checkbox" name="samsung" id="samsung">
-                <label for="samsung">Samsung</label>
-            </div>
-            <div>
-                <input class="rounded-md" type="checkbox" name="samsung" id="samsung">
-                <label for="samsung">Samsung</label>
-            </div>
         </div>
         <div class=" grid grid-cols-1 gap-y-2">
             <p class="font-bold col-span-1">Mức giá</p>
             <div class="col-span-1">
-                <input class="checked:accent-red-600 rounded-md" type="radio" name="price" id="price">
-                <label for="all">Tất cả</label>
+                <input class="checked:accent-red-600 rounded-md" type="radio" name="price" id="">
+                <label for="">Tất cả</label>
             </div>
             <div class="col-span-1">
                 <input class="rounded-md" type="radio" name="price" id="price">
@@ -155,11 +72,12 @@
                 <button class="border bg-gray-200 px-2">Giá cao đến thấp</button>
             </div>
             <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 ">
-                <div onclick="" class="group relative border rounded-xl">
+                <div th:data-product-id="${product.getId()}"
+                        onclick="redirectToProductDetail(this)" class="group relative border rounded-xl" th:each="product, index : ${products}">
                     <div class="absolute bg-primary-red text-white rounded-r-xl px-2 mt-1">Discount 10%</div>
                     <div
                             class="h-fit aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 ">
-                        <img class="w-full" src="https://product.hstatic.net/200000571041/product/image-removebg-preview-16_00eb97db15264c4e9f45abbd355a1ba0.png"
+                        <img th:src="${product.getImages().get(0).getUrlImage()}"
                              alt="Front of men&#039;s Basic Tee in black."
                              class="h-full w-full object-cover object-center lg:h-full lg:w-full">
                     </div>
@@ -168,7 +86,7 @@
                             <h3 class="text-md text-gray-700">
                                 <a href="#">
                                     <span aria-hidden="true" class="absolute inset-0"></span>
-                                    IPhone 15 Promax 512GB
+                                    <span th:text="${product.getName()}"></span>
                                 </a>
                             </h3>
                         </div>
@@ -178,125 +96,13 @@
                         </div>
                     </div>
                 </div>
-
-                <div onclick="" class="group relative border rounded-xl">
-                    <div class="absolute bg-primary-red text-white rounded-r-xl px-2 mt-1">Discount 10%</div>
-                    <div
-                            class="h-fit aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 ">
-                        <img class="w-full" src="https://product.hstatic.net/200000571041/product/image-removebg-preview-16_00eb97db15264c4e9f45abbd355a1ba0.png"
-                             alt="Front of men&#039;s Basic Tee in black."
-                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-                    </div>
-                    <div class="mt-4 flex flex-col justify-between px-2">
-                        <div>
-                            <h3 class="text-md text-gray-700">
-                                <a href="#">
-                                    <span aria-hidden="true" class="absolute inset-0"></span>
-                                    IPhone 15 Promax 512GB
-                                </a>
-                            </h3>
-                        </div>
-                        <div class="flex justify-between">
-                            <p class="text-primary-red text-xl font-medium ">18.991.000</p>
-                            <p class="text-sm font-medium text-gray-900 line-through">20.990.000</p>
-                        </div>
-                    </div>
-                </div>
-                <div onclick="" class="group relative border rounded-xl">
-                    <div class="absolute bg-primary-red text-white rounded-r-xl px-2 mt-1">Discount 10%</div>
-                    <div
-                            class="h-fit aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 ">
-                        <img class="w-full" src="https://product.hstatic.net/200000571041/product/image-removebg-preview-16_00eb97db15264c4e9f45abbd355a1ba0.png"
-                             alt="Front of men&#039;s Basic Tee in black."
-                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-                    </div>
-                    <div class="mt-4 flex flex-col justify-between px-2">
-                        <div>
-                            <h3 class="text-md text-gray-700">
-                                <a href="#">
-                                    <span aria-hidden="true" class="absolute inset-0"></span>
-                                    IPhone 15 Promax 512GB
-                                </a>
-                            </h3>
-                        </div>
-                        <div class="flex justify-between">
-                            <p class="text-primary-red text-xl font-medium ">18.991.000</p>
-                            <p class="text-sm font-medium text-gray-900 line-through">20.990.000</p>
-                        </div>
-                    </div>
-                </div>
-                <div onclick="" class="group relative border rounded-xl">
-                    <div class="absolute bg-primary-red text-white rounded-r-xl px-2 mt-1">Discount 10%</div>
-                    <div
-                            class="h-fit aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 ">
-                        <img class="w-full" src="https://product.hstatic.net/200000571041/product/image-removebg-preview-16_00eb97db15264c4e9f45abbd355a1ba0.png"
-                             alt="Front of men&#039;s Basic Tee in black."
-                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-                    </div>
-                    <div class="mt-4 flex flex-col justify-between px-2">
-                        <div>
-                            <h3 class="text-md text-gray-700">
-                                <a href="#">
-                                    <span aria-hidden="true" class="absolute inset-0"></span>
-                                    IPhone 15 Promax 512GB
-                                </a>
-                            </h3>
-                        </div>
-                        <div class="flex justify-between">
-                            <p class="text-primary-red text-xl font-medium ">18.991.000</p>
-                            <p class="text-sm font-medium text-gray-900 line-through">20.990.000</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div onclick="" class="group relative border rounded-xl">
-                    <div class="absolute bg-primary-red text-white rounded-r-xl px-2 mt-1">Discount 10%</div>
-                    <div
-                            class="h-fit aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 ">
-                        <img class="w-full" src="https://product.hstatic.net/200000571041/product/image-removebg-preview-16_00eb97db15264c4e9f45abbd355a1ba0.png"
-                             alt="Front of men&#039;s Basic Tee in black."
-                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-                    </div>
-                    <div class="mt-4 flex flex-col justify-between px-2">
-                        <div>
-                            <h3 class="text-md text-gray-700">
-                                <a href="#">
-                                    <span aria-hidden="true" class="absolute inset-0"></span>
-                                    IPhone 15 Promax 512GB
-                                </a>
-                            </h3>
-                        </div>
-                        <div class="flex justify-between">
-                            <p class="text-primary-red text-xl font-medium ">18.991.000</p>
-                            <p class="text-sm font-medium text-gray-900 line-through">20.990.000</p>
-                        </div>
-                    </div>
-                </div>
-                <div onclick="" class="group relative border rounded-xl">
-                    <div class="absolute bg-primary-red text-white rounded-r-xl px-2 mt-1">Discount 10%</div>
-                    <div
-                            class="h-fit aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md lg:aspect-none group-hover:opacity-75 ">
-                        <img class="w-full" src="https://product.hstatic.net/200000571041/product/image-removebg-preview-16_00eb97db15264c4e9f45abbd355a1ba0.png"
-                             alt="Front of men&#039;s Basic Tee in black."
-                             class="h-full w-full object-cover object-center lg:h-full lg:w-full">
-                    </div>
-                    <div class="mt-4 flex flex-col justify-between px-2">
-                        <div>
-                            <h3 class="text-md text-gray-700">
-                                <a href="#">
-                                    <span aria-hidden="true" class="absolute inset-0"></span>
-                                    IPhone 15 Promax 512GB
-                                </a>
-                            </h3>
-                        </div>
-                        <div class="flex justify-between">
-                            <p class="text-primary-red text-xl font-medium ">18.991.000</p>
-                            <p class="text-sm font-medium text-gray-900 line-through">20.990.000</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- More products... -->
+                <script>
+                    function redirectToProductDetail(event) {
+                        var productId = event.getAttribute('data-product-id');
+                        var productDetailUrl = '/product/' + productId; // Update the URL structure as needed
+                        window.location.href = productDetailUrl;
+                    }
+                </script>
             </div>
         </div>
     </div>
